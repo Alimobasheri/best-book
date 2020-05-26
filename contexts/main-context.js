@@ -1,0 +1,1 @@
+const MainContext = React.createContext()
