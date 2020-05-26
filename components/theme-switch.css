@@ -1,0 +1,62 @@
+.theme-switch {
+	width: 16vw;
+	height: 16vw;
+	position: relative;
+}
+
+.theme-switch__btn {
+	width: 100%;
+	height: 100%;
+	border-radius: 2vw;
+	background: transparent;
+}
+
+.theme-switch__big-circle {
+	content: "";
+	width: 7vw;
+	height: 7vw;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.theme-switch__small-circle {
+	width: 6vw;
+	height: 6vw;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 66.66%;
+	transform: translate(-50%, -50%);
+	opacity: 1;
+	transition: all 0.5s ease;
+}
+
+.theme-switch.toggled > .theme-switch__small-circle {
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+@media only screen and (min-width: 768px) {
+	.theme-switch {
+		width: 5vw;
+		height: 5vw;
+	}
+
+	.theme-switch__btn {
+		border-radius: 1vw;
+	}
+
+	.theme-switch__big-circle {
+		width: 3vw;
+		height: 3vw;
+	}
+
+	.theme-switch__small-circle {
+		width: 2.2vw;
+		height: 2.7vw;
+	}
+}

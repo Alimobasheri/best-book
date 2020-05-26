@@ -1,0 +1,17 @@
+.tab-btn__button {
+	padding: 1vh 2vw;
+	margin: 0;
+	font-size: 3vw;
+	border: none;
+	border-radius: 0;
+}
+
+.tab-btn__button:first-child {
+	border-top-right-radius: 1vw;
+	border-bottom-right-radius: 1vw;
+}
+
+.tab-btn__button:last-child {
+	border-top-left-radius: 1vw;
+	border-bottom-left-radius: 1vw;
+}

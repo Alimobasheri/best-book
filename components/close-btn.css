@@ -1,0 +1,50 @@
+.close-btn {
+	width: 6vw;
+	height: 6vw;
+	position: relative;
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.close-btn.toggled {
+	display: block;
+	opacity: 1;
+}
+
+.close-btn > span {
+	width: 100%;
+	height: 1vw;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translate(0, -50%);
+	transform-origin: center;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.close-btn > span:nth-child(1), .close-btn.toggled > span:nth-child(1) {
+	transform: rotateZ(45deg);
+}
+
+.close-btn > span:nth-child(2), .close-btn.toggled > span:nth-child(2) {
+	transform: rotateZ(-45deg);
+}
+
+.close-btn.toggled > span {
+	opacity: 1;
+}
+
+@media only screen and (min-width: 768px) {
+	.close-btn {
+		width: 4vw;
+		height: 4vw;
+	}
+	
+	.close-btn > span {
+		height: 0.5vw;
+	}
+}
