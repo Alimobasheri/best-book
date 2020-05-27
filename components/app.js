@@ -3,6 +3,7 @@ const {HashRouter, Route, Switch} = ReactRouterDOM
 
 const App = () => {
 	const rootPath ="/Best Book/index.html"
+alert(“welcom”)
 	return (
 		<MainProvider>
 			<MainContext.Consumer>
