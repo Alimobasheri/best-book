@@ -41,7 +41,7 @@ const BookCard = ({view, book, information, onClickFn}) => {
 	
 	return (
 		<div className={`book-card__wrapper ${view}`}>
-			<div className="book-card__cover" style={{backgroundImage: `url("assets/${src}")`, borderColor: context.theme.bookCoverBorderColor}} onClick={redirectToBookPage}>
+			<div className="book-card__cover" style={{backgroundImage: `url("https://raw.githubusercontent.com/Alimobasheri/best-book/master/assets/${src}")`, borderColor: context.theme.bookCoverBorderColor}} onClick={redirectToBookPage}>
 			</div>
 			<div className="book-card__text">
 				<div>
