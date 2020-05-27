@@ -1,6 +1,6 @@
 const {render} = ReactDOM
 const {HashRouter, Route, Switch} = ReactRouterDOM
-
+alert(1)
 const App = () => {
 	const rootPath ="/Best Book/index.html"
 alert(“welcom”)
