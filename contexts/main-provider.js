@@ -22,7 +22,7 @@ const MainProvider = (props) => {
 	useEffect(() => {
 		const fetchBooks = () => { return new Promise((resolve, reject) => {
 			const xhttp = new XMLHttpRequest()
-			xhttp.open('GET', './data/books.json')
+			xhttp.open('GET', 'https://raw.githubusercontent.com/Alimobasheri/best-book/master/data/books.json')
 			xhttp.onload = () => {
 				resolve(xhttp.responseText)
 			}
@@ -39,7 +39,7 @@ const MainProvider = (props) => {
 	useEffect(() => {
 		const fetchLists = () => { return new Promise((resolve, reject) => {
 			const xhttp = new XMLHttpRequest()
-			xhttp.open('GET', './data/home-lists.json')
+			xhttp.open('GET', 'https://raw.githubusercontent.com/Alimobasheri/best-book/master/data/home-lists.json')
 			xhttp.onload = () => {
 				resolve(xhttp.responseText)
 			}
