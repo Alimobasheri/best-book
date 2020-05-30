@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
+	<title>بست بوك</title>
+	<style>
+
+/* Tabbed Button Component */
+.tab-btn__button {
+	padding: 1vh 2vw;
+	margin: 0;
+	font-size: 3vw;
+	border: none;
+	border-radius: 0;
+}
+
+.tab-btn__button:first-child {
+	border-top-right-radius: 1vw;
+	border-bottom-right-radius: 1vw;
+}
+
+.tab-btn__button:last-child {
+	border-top-left-radius: 1vw;
+	border-bottom-left-radius: 1vw;
+}
+
+/* Hamburger Button Component */
+.nav-hamburger__btn {
+	width: 12vw;
+	height: 7.2vw;
+	background: none;
+	border: none;
+	padding: 1vw;
+	cursor: pointer;
+}
+.nav-hamburger__wrapper {
+	width: 100%;
+	min-height: 100%;
+	position: relative;
+}
+.nav-hamburger__wrapper > span {
+	content: "";
+	display: block;
+	width: 100%;
+	height: 1.2vw;
+	position: absolute;
+	background-color: #2E414E;
+	transform: translateY(-50%);
+	transition: top 0.5s 0.5s ease;
+	transition: transform 0.5s ease;
+}
+.nav-hamburger__wrapper > span:nth-child(1) {
+	transition: all 0.5s ease;
+	top: -1.2vw;
+}
+.nav-hamburger__wrapper > span:nth-child(2) {
+	margin-top: -0.6vw;
+	top: 50%;
+}
+.nav-hamburger__wrapper > span:nth-child(3) {
+	bottom: -1.2vw;
+}
+
+.nav-hamburger__wrapper.toggled > span {
+	transition: top 0.5s 0.5s ease;
+	transition: transform 0.5s ease;
+}
+.nav-hamburger__wrapper.toggled > span:nth-child(1) {
+	transition: all 0.5s ease;
+	width: 0;
+	opacity: 0;
+}
+.nav-hamburger__wrapper.toggled > span:nth-child(2) {
+	transform-origin: center;
+	transform: rotateZ(45deg);
+}
+.nav-hamburger__wrapper.toggled > span:nth-child(3) {
+	transform-origin: center;
+	margin-top: -0.6vw;
+	top: 50%;
+	transform: rotateZ(-45deg);
+}
+
+/* Close Button Component */
+.close-btn {
+	width: 6vw;
+	height: 6vw;
+	position: relative;
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.close-btn.toggled {
+	display: block;
+	opacity: 1;
+}
+
+.close-btn > span {
+	width: 100%;
+	height: 1vw;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translate(0, -50%);
+	transform-origin: center;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.close-btn > span:nth-child(1), .close-btn.toggled > span:nth-child(1) {
+	transform: rotateZ(45deg);
+}
+
+.close-btn > span:nth-child(2), .close-btn.toggled > span:nth-child(2) {
+	transform: rotateZ(-45deg);
+}
+
+.close-btn.toggled > span {
+	opacity: 1;
+}
+
+@media only screen and (min-width: 768px) {
+	.close-btn {
+		width: 4vw;
+		height: 4vw;
+	}
+	
+	.close-btn > span {
+		height: 0.5vw;
+	}
+}
+
+/* Button Component */
+.btn {
+	padding: 0;
+}
+
+.btn__button {
+	font-size: 4vw;
+	padding: 0.5vw 3vw;
+}
+
+.btn--nav > .btn__button {
+	font-size: 7vw;
+}
+
+@media only screen and (min-width: 768px) {
+	.btn__button {
+		font-size: 3vw;
+		padding: 0.5vw 1.5vw;
+	}
+	
+	.btn--nav > .btn__button {
+		font-size: 3vw;
+	}
+}
+
+/* Theme Switcher Component */
+.theme-switch {
+	width: 16vw;
+	height: 16vw;
+	position: relative;
+}
+
+.theme-switch__btn {
+	width: 100%;
+	height: 100%;
+	border-radius: 2vw;
+	background: transparent;
+}
+
+.theme-switch__big-circle {
+	content: "";
+	width: 7vw;
+	height: 7vw;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.theme-switch__small-circle {
+	width: 6vw;
+	height: 6vw;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 66.66%;
+	transform: translate(-50%, -50%);
+	opacity: 1;
+	transition: all 0.5s ease;
+}
+
+.theme-switch.toggled > .theme-switch__small-circle {
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+@media only screen and (min-width: 768px) {
+	.theme-switch {
+		width: 5vw;
+		height: 5vw;
+	}
+
+	.theme-switch__btn {
+		border-radius: 1vw;
+	}
+
+	.theme-switch__big-circle {
+		width: 3vw;
+		height: 3vw;
+	}
+
+	.theme-switch__small-circle {
+		width: 2.2vw;
+		height: 2.7vw;
+	}
+}
+
+/* Book Preview Component */
+.book-preview__wrapper {
+	padding: 1vh 0;
+	z-index: 0;
+	margin-top: 2vw;
+	padding-bottom: 12vw;
+	min-width: 100vw;
+	max-width: 100vw;
+	height: 100vh;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* Book Card Component */
+@keyframes fast-fade-in {
+	0% {opacity: 0; transform: scale(0)}
+	100%{opacity: 1; transform: scale(1)}
+}
+
+.book-card__wrapper {
+	width: 100%;
+}
+
+.book-card__cover {
+	background-size: 100% 100%;
+	height: 50vw;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	border: 2pt solid #F7F9FA;
+	box-shadow:
+		4px 4px 4px rgba(0, 0, 0, 0.2),
+		8px 8px 8px rgba(0, 0, 0, 0.1);
+	opacity: 0;
+	animation: fast-fade-in 0.5s 0.1s forwards;
+}
+
+.book-card__wrapper.column {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: start;
+	align-items: space-around;
+}
+
+.book-card__wrapper.column > .book-card__cover {
+	width: 36vw;
+}
+
+.book-card__text {
+	min-height: 100%;
+	font-size: 3vw;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: flex-start;
+	padding: 0 2vw;
+}
+.book-card__text > div {
+	align-self: stretch;
+}
+.book-card__wrapper.row > .book-card__text {
+	padding: 1vh 0;
+}
+
+.book-card__name, .book-card__price {
+	color: #2E414E;
+	font-size: 4vw;
+}
+
+.book-card__writer, .book-card__translator {
+	color: #B5B5B5;
+	font-size: 4vw;
+}
+
+.book-close-btn__wrapper {
+	flex-grow: 2;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-start;
+}
+
+.desc-comments__wrapper {
+	min-width: 100%;
+	max-width: 100%;
+	padding: 2vh 0;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.desc-comments__wrapper__desc__text {
+	font-size: 3vw;
+	padding: 2vh 4vw;
+}
+
+@media only screen and (min-width: 768px) {
+	.book-card__cover {
+		height: 35vw;
+	}
+	
+	.book-card__name, .book-card__writer, .book-card__translator, .book-card__price {
+		font-size: 3vw;
+	}
+	
+	.book-card__wrapper.column > .book-card__cover {
+		width: 25vw;
+	}
+	
+	.book-card__wrapper.column > .book-card__text > div > div{
+		font-size: 4vw;
+	}
+	
+	.desc-comments__wrapper__desc__text {
+		font-size: 3vw;
+	}
+}
+
+/* List Component */
+@keyframes fade-in {
+	0% {opacity: 0}
+	100% {opacity: 1}
+}
+
+.list {
+	background-color: #FFFFFF;
+	padding: 2vh 0;
+}
+
+.list__title {
+	color: #2E414E;
+	padding: 2vh 2vw;
+}
+
+.list__wrapper {
+	overflow-x: hidden;
+}
+
+.list__wrapper__column {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: start;
+	padding: 0 2vw;
+}
+
+.list__wrapper__row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: start;
+}
+
+.list__card__row {
+	min-width: 36% !important;
+	max-width: 36% !important;
+	margin: 0 2vw;
+}
+.list__card__row:nth-child(1) {
+	margin-right: 2vw;
+}
+.list__card__row:last-child {
+	margin-left: 2vw;
+}
+
+.list__card__column {
+	min-width: 100% !important;
+	max-width: 100% !important;
+	margin: 2vh 0;
+}
+
+.empty-list__text {
+	width: 100%;
+	padding: 2vh 2vw;
+	text-align: center;
+}
+
+.results-list {
+	opacity: 0;
+	animation: fade-in 0.7s forwards;
+}
+
+.webkit-scroll {
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+@media screen and (min-width: 768px) {
+	.list__card__row {
+		min-width: 25% !important;
+		max-width: 25% !important;
+		margin: 0 1vw;
+	}
+
+	.list__card__column {
+		min-width: 100% !important;
+		max-width: 100% !important;
+		margin: 1vh 0;
+	}
+}
+
+/* Search Input Component */
+.search-bar__wrapper {
+	width: 100%;
+	height: auto;
+	padding: 2vh 2vw;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.search-bar__input-wrapper {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: start;
+	align-items: center;
+	width: 100%;
+	border-radius: 5px;
+	-webkit-box-shadow: 
+		2px 2px 2px rgba(0, 0, 0, 0.2),
+		4px 4px 4px rgba(0, 0, 0, 0.1),
+		8px 8px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar__input {
+	width: 78vw;
+	height: 10vw;
+	border: none;
+	padding: 1vh 1vw;
+	font-size: 4vw;
+}
+
+.search-bar__icon {
+	width: 11vw;
+	height: 10vw;
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-bar__icon__svg {
+	width: 6vw;
+	height: 6vw;
+}
+
+/* Navigation Menu Component */
+@keyframes roll-in {
+	0% {transform: translate(0, -100%);}
+	100% {transform: translate(0, 0);}
+}
+
+.nav {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	overflow: hidden;
+	position: -webkit-sticky;
+	position: sticky;
+	width: 100vw;
+	z-index: 0;
+}
+.nav.toggled {
+	 height: 100vh;
+	 z-index: 1;
+}
+
+.nav__wrapper {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1vh 2vw;
+	padding-bottom: 0;
+}
+
+.nav-brand__wrapper {
+	min-width: 80%;
+}
+.nav-hamburger {
+	min-width: 20%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.nav-items__wrapper {
+	min-width: 100vw;
+	height: 0;
+	position: relative;
+	overflow: hidden;
+	transition: opacity 0.3 ease;
+	opacity: 0;
+}
+.nav-items__wrapper > div {
+	display: none;
+}
+.nav.toggled > .nav-items__wrapper {
+	flex: 1;
+	min-width: 100vw;
+	transition: opacity 1s ease;
+	opacity: 1;
+	padding: 2vh 2vw;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: no-wrap;
+	justify-content: center;
+	align-items: center;
+	animation: roll-in 0.7s forwards;
+}
+.nav.toggled > .nav-items__wrapper > div {
+	padding-bottom: 2vw;
+	display: block;
+}
+.link-item {
+	color: #2E414E;
+	font-size: 7vw;
+}
+
+.nav-brand__h1 {
+	color: #2E414E;
+	font-weight: 400pt;
+	font-size: 8vw;
+}
+
+@media only screen and (min-width: 768px) {
+	.link-item {
+		font-size: 3vw;
+	}
+	
+	.nav-brand__h1 {
+		font-size: 4vw;
+	}
+	
+	.nav-hamburger {
+		display: none;
+		height: 0;
+		flex: 0;
+	}
+	
+	.nav {
+		min-width: 100vw;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		padding: 2vh 2vw;
+	}
+	
+	.nav-wrapper {
+		padding: 0;
+		display: block;
+		flex: 2;
+	}
+	
+	.nav-brand__wrapper {
+		width: auto;
+		min-width: 0;
+		padding: 0;
+	}
+	
+	.nav-items__wrapper {
+		width: auto;
+		min-width: 0;
+		height: auto;
+		position: relative;
+		transition: opacity 0;
+		opacity: 1;
+		padding: 0 2vw;
+		flex: 8;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		align-items: center;
+	}
+	.nav-items__wrapper > div {
+		display: block;
+	}
+}
+
+/* Home Component */
+.home__wrapper {
+	padding: 1vh 0;
+	z-index: 0;
+	margin-top: 2vw;
+	padding-bottom: 12vw;
+	min-width: 100vw;
+	max-width: 100vw;
+	height: 100vh;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* About Us Component */
+.about-us__wrapper {
+	padding: 0 0;
+	margin-top: 2vw;
+	padding-bottom: 9vw;
+	min-width: 100vw;
+	max-width: 100vw;
+	height: 100vh;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+	z-index: 0;
+}
+
+.about-us__article {
+	padding: 0 2vw;
+	height: auto;
+}
+
+.about-us__article__h1 {
+	font-size: 6vw;
+	padding-bottom: 2vh;
+}
+
+.about-us__article__text {
+	padding: 2vh 4vw;
+	font-size: 4vw;
+}
+
+/* App Component */
+*, *:before, *:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body, #root {
+	height: 100vh !important;
+	width: 100vw !important;
+}
+
+body {
+	background-color: #F8F9FB;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+#root {
+	overflow: hidden;
+}
+
+.app-wrapper {
+	width: 100%;
+	overflow: hidden;
+	
+}
+	</style>
+</head>
+<body>
+	<div id="root"></div>
+	<!-- Loading Babael CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" type="text/javascript"></script>
+	<!-- Loading React CDNs -->
+	<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js" type="text/javascript"></script>
+	<script type="text/babel">
+
+const {render} = ReactDOM
+const {HashRouter, Route, Switch, useHistory, useLocation, useParams, Link} = ReactRouterDOM
+const {useContext, useState, useEffect} = React
+
+// Main Context
+const MainContext = React.createContext()
+
+// Main Provider
+const MainProvider = (props) => {
+	const theme = {
+		light: {
+			primaryBackgroundColor: "#F8F9FB",
+			secondaryBackgroundColor: "#FFFFFF",
+			primaryFontColor: "#2E414E",
+			secondaryFontColor: "#B5B5B5",
+			bookCoverBorderColor: "#F7F9FA"
+		},
+		dark: {
+			primaryBackgroundColor: "#1F1F1F",
+			secondaryBackgroundColor: "#4A4A4A",
+			primaryFontColor: "#F7F9FA",
+			secondaryFontColor: "#B4B4B4",
+			bookCoverBorderColor: "#6A6A6A"
+		}
+	}
+	
+	const [data, setData] = useState({books: [], isFetching: true})
+	useEffect(() => {
+		const fetchBooks = () => { return new Promise((resolve, reject) => {
+			const xhttp = new XMLHttpRequest()
+			xhttp.open('GET', 'https://raw.githubusercontent.com/Alimobasheri/best-book/master/data/books.json')
+			xhttp.onload = () => {
+				resolve(xhttp.responseText)
+			}
+			xhttp.send()
+		})
+		}
+		fetchBooks().then(res => JSON.parse(res)).then(lst => setData({books: lst, isFetching: false}))
+	}, [])
+	
+	const [themeMode, setThemeMode] = useState(false)
+	
+	
+	const [homeLists, setHomeLists] = useState({})
+	useEffect(() => {
+		const fetchLists = () => { return new Promise((resolve, reject) => {
+			const xhttp = new XMLHttpRequest()
+			xhttp.open('GET', 'https://raw.githubusercontent.com/Alimobasheri/best-book/master/data/home-lists.json')
+			xhttp.onload = () => {
+				resolve(xhttp.responseText)
+			}
+			xhttp.send()
+		})
+		}
+		fetchLists().then(res => JSON.parse(res)).then(lst => setHomeLists(lst))
+	}, [])
+	
+	const [searchMode, setSearchMode] = useState(false)
+	const [searchText, setSearchText] = useState('')
+	
+	const [selectedBook, setSelectedBook] = useState('')
+	
+	const contextValue = {
+		books: data.books,
+		homeLists,
+		themeMode, 
+		setThemeMode, 
+		theme: theme[themeMode ? "dark" : "light"],
+		searchMode,
+		setSearchMode,
+		searchText,
+		setSearchText,
+		selectedBook,
+		setSelectedBook,
+	}
+	
+	return (
+		<MainContext.Provider value={contextValue}>
+			{props.children}
+		</MainContext.Provider>
+	)
+}
+
+// Utility Functions
+const toFarsiDigits = num => {
+	const digits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+	return num.toString().replace(/[0-9]/g, (d) => digits[d])
+}
+
+// Tab Button
+const TabBtn = ({titles, onClickFn, activeIdx}) => {
+	const mainContext = useContext(MainContext)
+	const theme = mainContext.theme
+	
+	const btnStyle = {
+		backgroundColor: theme.primaryBackgroundColor,
+		color: theme.primaryFontColor
+	}
+	
+	const activeBtnStyle = {
+		backgroundColor: theme.primaryFontColor,
+		color: theme.primaryBackgroundColor
+	}
+	
+	const handleClick = (e, idx) => onClickFn(idx)
+	
+	const buttons = titles.map((title, idx) =>
+		<button key={idx} className="tab-btn__button" style={idx === activeIdx ? activeBtnStyle : btnStyle} onClick={(e) => handleClick(e, idx)}>{title}</button>
+	)
+	return (
+		<div>
+			{buttons}
+		</div>
+	)
+}
+
+// Nav Hamburger Button
+const HamburgerButton = ({lineColor, toggled, toggle}) => {
+	return (
+		<button className="nav-hamburger__btn" onClick={(e) => toggle(!toggled)}>
+			<div className={`nav-hamburger__wrapper ${toggled ? 'toggled' : ''}`}>
+				<span className="nav-hamburger__line__1" style={{backgroundColor: lineColor}}></span>
+				<span className="nav-hamburger__line__2" style={{backgroundColor: lineColor}}></span>
+				<span className="nav-hamburger__line__3" style={{backgroundColor: lineColor}}></span>
+			</div>
+		</button>
+	)
+}
+
+// Close Button
+const CloseBtn = ({toggled, onClickFn}) => {
+	const mainContext = useContext(MainContext)
+	const {primaryFontColor} = mainContext.theme
+	const lineStyle = {backgroundColor: primaryFontColor}
+	return (
+		<button className={`close-btn ${toggled ? 'toggled' : ''}`} onClick={onClickFn}>
+			<span className="close-btn__top-line" style={lineStyle}></span>
+			<span className="close-btn__bottom-line" style={lineStyle}></span>
+		</button>
+	)
+}
+
+// Button
+const Btn = ({text, outline, id, navButton, onClick}) => {
+	return (
+		<MainContext.Consumer>
+		{context => {
+			const primaryStyle = {
+				backgroundColor: context.theme.primaryFontColor,
+				color: context.theme.primaryBackgroundColor,
+				border: 'none',
+				borderRadius: '1vw',
+			}
+			const outlinedStyle = {
+				backgroundColor: 'transparent',
+				color: context.theme.primaryFontColor,
+				border: `0.3vw solid ${context.theme.primaryFontColor}`,
+				borderRadius: '1vw',
+			}
+			return(
+			<div className={`btn btn--${outline ? 'outline' : 'primary'} ${navButton ? 'btn--nav' : ''}`}>
+				<button className='btn__button' style={outline ? outlinedStyle : primaryStyle} onClick={onClick}>
+					{text}
+				</button>
+			</div>
+			)
+		}}
+		</MainContext.Consumer>
+	)
+}
+
+// Theme Mode Switcher
+const ThemeSwitch = () => {
+	return (
+		<MainContext.Consumer>
+		{context =>
+			<div className={`theme-switch ${context.themeMode && 'toggled'}`}>
+				<label for="themeSwitchBtn">
+					<button id="themeSwitchBtn" className="theme-switch__btn" style={{backgroundColor: context.theme.primaryBackgroundColor, borderColor: context.theme.primaryFontColor}} onClick={(e) => {e.preventDefault(); context.setThemeMode(!context.themeMode)}}></button>
+				</label>
+				<span className="theme-switch__big-circle" style={{backgroundColor: context.theme.primaryFontColor}}></span>
+				<span className="theme-switch__small-circle" style={{backgroundColor: context.theme.primaryBackgroundColor}}></span>
+			</div>
+		}
+		</MainContext.Consumer>
+	)
+}
+
+// Book Preview
+const BookPreview = () => {
+	const mainContext = useContext(MainContext)
+	const {id} = useParams()
+	const location = useLocation()
+	
+	const {books} = mainContext
+	
+	const bookPreview = 
+		<List view={'column'} title={''} books={[...books].filter(book => book.id == id)} information />
+	return (
+		<div dir="rtl" className="book-preview__wrapper">
+			{bookPreview}
+		</div>
+	)
+}
+// Book Card
+const BookCard = ({view, book, information, onClickFn}) => {
+	const {id, name, writer, translator, price, src} = book
+	const desc = book.desc || null
+	
+	var history = useHistory()
+	const location = useLocation()
+	
+	const context = useContext(MainContext)
+	
+	const [openTab, setOpenTab] = useState(0)
+	
+	const bookInformation =
+		<React.Fragment>
+			<p>{desc}</p>
+		</React.Fragment>
+		
+	const handleClick = (e) => {
+		e.preventDefault()
+		onClickFn(id)
+	}
+	
+	const unClick = (e) => {
+		e.preventDefault()
+		onClickFn('')
+	}
+	
+	const redirectToBookPage = (e) => {
+		e.preventDefault()
+		history.push({pathname: `/book/${id}`, state:{prevPath: location.pathname}})
+	}
+	
+	const goToPrevPath = (e) => {
+		e.preventDefault()
+		history.push({pathname: location.state.prevPath, state:{prevPath: location.pathname}})
+	}
+	
+	const handleTabClick = (idx) => setOpenTab(idx)
+	
+	return (
+		<div className={`book-card__wrapper ${view}`}>
+			<div className="book-card__cover" style={{backgroundImage: `url("https://raw.githubusercontent.com/Alimobasheri/best-book/master/assets/${src}")`, borderColor: context.theme.bookCoverBorderColor}} onClick={redirectToBookPage}>
+			</div>
+			<div className="book-card__text">
+				<div>
+					<div className="book-card__name" style={{color: context.theme.primaryFontColor}}>{name}</div>
+					<div className="book-card__writer" style={{color: context.theme.secondaryFontColor}}>{writer}{translator && translator != 'false' && <span className="book-card__translator" style={{color: context.theme.secondaryFontColor}}> \ {translator}</span>}</div>
+				</div>
+				<div>
+					<Btn text={`${toFarsiDigits(price)} تومان`} outline />
+				</div>
+			</div>
+			{information && 
+				<React.Fragment>
+					<div className="book-close-btn__wrapper">
+						<CloseBtn toggled onClickFn={goToPrevPath} />
+					</div>
+					<div className="desc-comments__wrapper">
+						<div className="tab-btns__wrapper">
+							<TabBtn titles={['توضيحات', 'نظرات']} onClickFn={handleTabClick} activeIdx={openTab}/>
+						</div>
+						{desc !== null && desc.split("\n\n").map((para, idx) => 
+							<p key={idx} className="desc-comments__wrapper__desc__text" style={{color: context.theme.primaryFontColor}}>
+								{para}
+							</p>
+						)}
+					</div>
+				</React.Fragment>
+			}
+		</div>
+	)
+}
+
+// Book List
+const List = ({view, title, books, information}) => {
+	const [scroll, setScroll] = useState(false)
+	useEffect(() => {
+		if(books.length > 0) setTimeout(() => setScroll(true), 700)
+	})
+	return (
+		<MainContext.Consumer>
+		{context =>
+		<div className="list" style={{backgroundColor: context.theme.secondaryBackgroundColor}}>
+			<h1 className="list__title" style={{color: context.theme.primaryFontColor}}>{title}</h1>
+			{books && books.length > 0 ?
+				<div className={`list__wrapper list__wrapper__${view == 'column' ? 'column' : 'row'} ${scroll ? 'webkit-scroll' : ''}`} >
+					{
+						books.map((book, i) =>
+							<div className={`list__card__${view}`} key={i}>
+								<BookCard view={view} book={book} information={information} onClickFn={context.setSelectedBook} />
+							</div>
+						)
+					}
+				</div> :
+				<h1 className="empty-list__text" style={{color: context.theme.secondaryFontColor}}>كتابى موجود نمى باشد.</h1>
+			}
+		</div>
+		}
+		</MainContext.Consumer>
+	)
+}
+
+// Search Input
+const SearchBar = (props) => {
+	var _searchInput
+	return(
+		<MainContext.Consumer>
+		{context => {
+			const {theme, setSearchMode, searchText, setSearchText} = context
+			const inputWrapperStyle = {
+				backgroundColor: theme.secondaryBackgroundColor
+			}
+			const inputStyle = {
+				backgroundColor: theme.secondaryBackgroundColor,
+				color: theme.secondaryFontColor
+			}
+			
+			const IconSVGTag = (<svg className="search-bar__icon__svg" version="1.1" x="0" y="0" viewBox="0, 0, 60, 62">
+				<g id="search-icon">
+    				<path d="M22.276,42.265 C11.354,42.265 2.5,33.364 2.5,22.383 C2.5,11.402 11.354,2.5 22.276,2.5 C33.199,2.5 42.053,11.402 42.053,22.383 C42.053,33.364 33.199,42.265 22.276,42.265 z" fill-opacity="0" stroke={theme.secondaryFontColor} stroke-width="4" id="circle"/>
+    				<path d="M34.005,35.876 L34.005,35.876 C35.673,34.2 38.423,34.247 40.148,35.982 L56.675,52.597 C58.4,54.332 58.447,57.097 56.78,58.773 L56.78,58.773 C55.112,60.449 52.362,60.402 50.637,58.668 L34.11,42.052 C32.385,40.318 32.338,37.553 34.005,35.876 z" fill={theme.secondaryFontColor} id="handle"/>
+				</g>
+			</svg>)
+			
+			const setFocus = (e) => {
+				e.preventDefault()
+				setSearchMode(true);
+			}
+			
+			const setBlur = (e) => {
+				e.preventDefault()
+				setSearchMode(false);
+			}
+			
+			const setText = (e) => {
+				e.preventDefault()
+				setSearchText(_searchInput.value)
+			}
+			
+			const clearText = (e) => {
+				e.preventDefault()
+				setSearchText('')
+			}
+			return(
+				<div className="search-bar__wrapper">
+					<div className="search-bar__input-wrapper" style={inputWrapperStyle}>
+						<div className="search-bar__icon">{IconSVGTag}</div>
+						<input className="search-bar__input"  ref={input => _searchInput = input} onFocus={setFocus} onBlur={setBlur} style={inputStyle} onChange={setText} type="text" value={searchText} placeholder="اينجا جستجو كنيد..."/>
+						<CloseBtn onClickFn={clearText} toggled={searchText != '' ? true : false} />
+					</div>
+				</div>
+			)
+		}
+		}
+		</MainContext.Consumer>
+	)
+}
+
+// Navigatin Menu
+const Nav = () => {
+	const [toggled, setToggled] = useState(false)
+	return(
+	<MainContext.Consumer>
+	{context =>
+	<div dir="rtl" className={`nav ${toggled ? 'toggled' : ''}`} style={{backgroundColor: context.theme.primaryBackgroundColor}}>
+		<div className="nav__wrapper">
+			<div className="nav-brand__wrapper"><h1 className="nav-brand__h1" style={{color: context.theme.primaryFontColor}}>بست بوك</h1></div>
+			<div className="nav-hamburger">
+				<HamburgerButton lineColor={context.theme.primaryFontColor} toggled={toggled} toggle={setToggled}/>
+			</div>
+		</div>
+		<div className={`nav-items__wrapper ${toggled ? 'toggled' : ''}`}>
+			<div><Link to="/" style={{textDecoration: 'none'}}><span className='link-item' style={{color: context.theme.primaryFontColor}}>خانه</span></Link></div>
+			<div><Link to="about-us" style={{textDecoration: 'none'}}><span className='link-item' style={{color: context.theme.primaryFontColor}}>درباره</span></Link></div>
+			<div><Link to="contact" style={{textDecoration: 'none'}}><span className='link-item' style={{color: context.theme.primaryFontColor}}>تماس با ما</span></Link></div>
+			<Btn text='ورود' navButton outline/>
+			<Btn text='عضويت' navButton />
+			<ThemeSwitch />
+		</div>
+	</div>
+	}
+	</MainContext.Consumer>
+	)
+}
+
+//Home
+const Home = (props) => {
+	return (
+		<MainContext.Consumer>
+		{context => {
+			const {books, homeLists, searchText, selectedBook} = context
+			
+			const homeListsEls =
+				homeLists["HOME_LISTS"] && homeLists["HOME_LISTS"].map((name, i) =>
+					<List key={i} view={'row'} title={homeLists[name].title} books={[...books].filter(book => homeLists[name].books_ids.includes(book.id))} />
+				)
+			
+			const homePage = 
+				selectedBook != '' ?
+					<List view={'column'} title={''} books={[...books].filter(book => book.id == selectedBook)} information /> :
+					homeListsEls
+			
+			const resultsList = searchText == '' ? 
+				[] : 
+				<List view={'column'} className="results-list" books={[...books].filter(book => book.name.includes(searchText) || book.writer.includes(searchText) || book.translator.includes(searchText))} />
+			return(
+				<div dir="rtl" className='home__wrapper'>
+					<SearchBar />
+					{searchText == '' ? 
+						homePage : 
+						resultsList
+					}
+				</div>
+			)
+		}
+		}
+		</MainContext.Consumer>
+	)
+}
+
+//About us
+const AboutUs = () => {
+	return (
+		<MainContext.Consumer>
+		{context =>
+			<div dir="rtl" className="about-us__wrapper">
+				<article className="about-us__article" style={{backgroundColor: context.theme.secondaryBackgroundColor}}>
+					<header className="about-us__article__header">
+						<h1 className="about-us__article__h1" style={{color: context.theme.primaryFontColor}}>
+							هر كتاب سفرى تازه است.
+						</h1>
+						<h1 className="about-us__article__h1" style={{color: context.theme.primaryFontColor}}>
+						بگذاريد بست بوك همسفرتان باشد.
+						</h1>
+					</header>
+					<p className="about-us__article__text" style={{color: context.theme.secondaryFontColor}}>
+						قصد ما در بست بوك، ايجاد سهولت در خريدن و خواندن كتابهاست. كتابى كه دوست داريد را يافته و به آسانى سفارش دهيد. يا اگر به دنبالى كتابى تازه براى خواندن هستيد، در ميان مجموعه هاى گردآورى شده توسط بست بوك، به گردش پرداخته و كتابى را كه بيش از همه توجهتان را جلب مى كند بيابيد. 
+					</p>
+					<p className="about-us__article__text" style={{color: context.theme.secondaryFontColor}}>
+						بست بوك قابليت هايى همچون حاشيه نويسى، پيشنهادات، امتيازبندى، جستجو، توضيحات و خلاصه را در اختيارتان مى گذارد. 
+					</p>
+				</article>
+			</div>
+		}
+		</MainContext.Consumer>
+	)
+}
+
+//App
+const App = () => {
+	const rootPath ="/Best Book/index.html"
+	return (
+		<MainProvider>
+			<MainContext.Consumer>
+			{context =>
+				<React.Fragment>
+					<div className='app-wrapper' style={{backgroundColor: context.theme.primaryBackgroundColor}}>
+						<Nav />
+						<Switch>
+							<Route path={`/about-us`} component={AboutUs}/>
+							<Route path={`/book/:id`} component={BookPreview} />
+							<Route path={`/`} component={Home} exact/>
+						</Switch>
+					</div>
+				</React.Fragment>
+			}
+			</MainContext.Consumer>
+		</MainProvider>
+	)
+}
+
+const root = document.querySelector('#root')
+render(
+	<HashRouter> 
+		<App />
+	</HashRouter>, 
+	root
+)
+	</script>
+	
+</body>
+</html>
