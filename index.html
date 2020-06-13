@@ -224,16 +224,40 @@
 }
 
 /* Book Preview Component */
+@keyframes slide-in {
+	0% { transform: translateX(-100%);}
+	100% { transform: translateX(0);}
+}
+
+@keyframes slide-out {
+	0% { transform: translateX(0%);}
+	100% { transform: translateX(-100%);}
+}
+
+@keyframes display-in {
+	0% { opacity: 0;}
+	100%{ opacity: 1;}
+}
+
 .book-preview__wrapper {
-	padding: 1vh 0;
-	z-index: 0;
-	margin-top: 2vw;
-	padding-bottom: 12vw;
-	min-width: 100vw;
-	max-width: 100vw;
-	height: 100vh;
-	overflow: scroll;
-	-webkit-overflow-scrolling: touch;
+	position: relative;
+}
+
+.book-preview__wrapper.wait {
+	opacity: 0;
+	animation: display-in 0.7s 0s forwards;
+}
+
+.book-preview__wrapper.enter {
+	position: absolute;
+	transform: translateX(-100%);
+	animation: slide-in 0.7s 0s forwards;
+}
+
+.exit {
+	position: absolute;
+	transform: translateX(0%);
+	animation: slide-out 0.7s 0s forwards;
 }
 
 /* Book Card Component */
@@ -247,6 +271,16 @@
 }
 
 .book-card__cover {
+	background-size: 100% 100%;
+	height: 50vw;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	border: 2pt solid #F7F9FA;
+	box-shadow:
+		4px 4px 4px rgba(0, 0, 0, 0.2),
+		8px 8px 8px rgba(0, 0, 0, 0.1);
+}
+.book-card__cover.fade{
 	background-size: 100% 100%;
 	height: 50vw;
 	background-repeat: no-repeat;
@@ -299,11 +333,8 @@
 }
 
 .book-close-btn__wrapper {
-	flex-grow: 2;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: flex-start;
+	position: relative;
+	text-align: left;
 }
 
 .desc-comments__wrapper {
@@ -317,12 +348,40 @@
 }
 
 .desc-comments__wrapper__desc__text {
-	font-size: 3vw;
+	font-size: 4vw;
 	padding: 2vh 4vw;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 998px) {
 	.book-card__cover {
+		height: 30vw;
+	}
+	.book-card__cover.fade {
+		height: 30vw;
+	}
+	
+	.book-card__name, .book-card__writer, .book-card__translator, .book-card__price {
+		font-size: 2.7vw;
+	}
+	
+	.book-card__wrapper.column > .book-card__cover {
+		width: 25vw;
+	}
+	
+	.book-card__wrapper.column > .book-card__text > div > div{
+		font-size: 3.5vw;
+	}
+	
+	.desc-comments__wrapper__desc__text {
+		font-size: 2.7vw;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.book-card__cover {
+		height: 35vw;
+	}
+	.book-card__cover.fade {
 		height: 35vw;
 	}
 	
@@ -413,7 +472,21 @@
 	-webkit-overflow-scrolling: touch;
 }
 
-@media screen and (min-width: 768px) {
+@media only screen and (min-width: 998px) {
+	.list__card__row {
+		min-width: 22% !important;
+		max-width: 22% !important;
+		margin: 0 1vw;
+	}
+
+	.list__card__column {
+		min-width: 100% !important;
+		max-width: 100% !important;
+		margin: 1vh 0;
+	}
+}
+
+@media only screen and (max-width: 768px) {
 	.list__card__row {
 		min-width: 25% !important;
 		max-width: 25% !important;
@@ -548,6 +621,9 @@
 	color: #2E414E;
 	font-size: 7vw;
 }
+.link-item.active {
+	border-bottom: 1.5px solid;
+}
 
 .nav-brand__h1 {
 	color: #2E414E;
@@ -577,7 +653,8 @@
 		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: center;
-		padding: 2vh 2vw;
+		padding: 1vh 2vw;
+		padding-top: 1vh;
 	}
 	
 	.nav-wrapper {
@@ -613,31 +690,8 @@
 }
 
 /* Home Component */
-.home__wrapper {
-	padding: 1vh 0;
-	z-index: 0;
-	margin-top: 2vw;
-	padding-bottom: 12vw;
-	min-width: 100vw;
-	max-width: 100vw;
-	height: 100vh;
-	overflow: scroll;
-	-webkit-overflow-scrolling: touch;
-}
 
 /* About Us Component */
-.about-us__wrapper {
-	padding: 0 0;
-	margin-top: 2vw;
-	padding-bottom: 9vw;
-	min-width: 100vw;
-	max-width: 100vw;
-	height: 100vh;
-	overflow: scroll;
-	-webkit-overflow-scrolling: touch;
-	z-index: 0;
-}
-
 .about-us__article {
 	padding: 0 2vw;
 	height: auto;
@@ -679,8 +733,21 @@ body {
 
 .app-wrapper {
 	width: 100%;
+	height: 100%;
 	overflow: hidden;
-	
+	padding-bottom: 6vh;
+}
+
+.app-body__wrapper {
+	padding: 1vh 0;
+	z-index: 0;
+	margin-top: 0;
+	padding-bottom: 0;
+	min-width: 100vw;
+	max-width: 100vw;
+	height: 90vh;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
 }
 	</style>
 </head>
@@ -696,7 +763,7 @@ body {
 
 const {render} = ReactDOM
 const {HashRouter, Route, Switch, useHistory, useLocation, useParams, Link} = ReactRouterDOM
-const {useContext, useState, useEffect} = React
+const {useContext, useState, useEffect, useRef} = React
 
 // Main Context
 const MainContext = React.createContext()
@@ -724,7 +791,7 @@ const MainProvider = (props) => {
 	useEffect(() => {
 		const fetchBooks = () => { return new Promise((resolve, reject) => {
 			const xhttp = new XMLHttpRequest()
-			xhttp.open('GET', 'https://raw.githubusercontent.com/Alimobasheri/best-book/master/data/books.json')
+			xhttp.open('GET', './data/books.json')
 			xhttp.onload = () => {
 				resolve(xhttp.responseText)
 			}
@@ -741,7 +808,7 @@ const MainProvider = (props) => {
 	useEffect(() => {
 		const fetchLists = () => { return new Promise((resolve, reject) => {
 			const xhttp = new XMLHttpRequest()
-			xhttp.open('GET', 'https://raw.githubusercontent.com/Alimobasheri/best-book/master/data/home-lists.json')
+			xhttp.open('GET', './data/home-lists.json')
 			xhttp.onload = () => {
 				resolve(xhttp.responseText)
 			}
@@ -756,6 +823,13 @@ const MainProvider = (props) => {
 	
 	const [selectedBook, setSelectedBook] = useState('')
 	
+	const [navHeight, setNavHeight] = useState(0)
+	
+	const [currentScroll, setCurrentScroll] = useState(0)
+	const [prevScroll, setPrevScroll] = useState([0])
+	
+	const [endCompMockUp, setEndCompMockUp] = useState('')
+	
 	const contextValue = {
 		books: data.books,
 		homeLists,
@@ -768,6 +842,14 @@ const MainProvider = (props) => {
 		setSearchText,
 		selectedBook,
 		setSelectedBook,
+		navHeight,
+		setNavHeight,
+		getCurrentScroll: () => {return currentScroll},
+		setCurrentScroll,
+		prevScroll,
+		setPrevScroll,
+		endCompMockUp,
+		setEndCompMockUp
 	}
 	
 	return (
@@ -781,6 +863,10 @@ const MainProvider = (props) => {
 const toFarsiDigits = num => {
 	const digits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 	return num.toString().replace(/[0-9]/g, (d) => digits[d])
+}
+
+const getScrollPosition = (elem) => {
+	return {y: elem.scrollTop, x: elem.scrollLeft}
 }
 
 // Tab Button
@@ -874,11 +960,97 @@ const ThemeSwitch = () => {
 				<label for="themeSwitchBtn">
 					<button id="themeSwitchBtn" className="theme-switch__btn" style={{backgroundColor: context.theme.primaryBackgroundColor, borderColor: context.theme.primaryFontColor}} onClick={(e) => {e.preventDefault(); context.setThemeMode(!context.themeMode)}}></button>
 				</label>
-				<span className="theme-switch__big-circle" style={{backgroundColor: context.theme.primaryFontColor}}></span>
-				<span className="theme-switch__small-circle" style={{backgroundColor: context.theme.primaryBackgroundColor}}></span>
+				<span className="theme-switch__big-circle" style={{backgroundColor: context.theme.primaryFontColor}} onClick={(e) => {e.preventDefault(); context.setThemeMode(!context.themeMode)}}></span>
+				<span className="theme-switch__small-circle" style={{backgroundColor: context.theme.primaryBackgroundColor}} onClick={(e) => {e.preventDefault(); context.setThemeMode(!context.themeMode)}}></span>
 			</div>
 		}
 		</MainContext.Consumer>
+	)
+}
+
+// Scroll Manager Component
+const ScrollManager = ({getAppBodyWrapperRef}) => {
+	const mainContext = useContext(MainContext)
+	
+	const location = useLocation()
+	
+	useEffect( () => {
+		getAppBodyWrapperRef().current.addEventListener('scroll', () => {
+			mainContext.setCurrentScroll(getAppBodyWrapperRef().current.scrollTop)
+		}, false)
+	}, [])
+	
+	useEffect(() => {
+		if (location.state !== undefined && location.state.redirect !== undefined && location.state.redirect === 'BACKWARD') {
+			if(getAppBodyWrapperRef().current !== undefined) {
+				getAppBodyWrapperRef().current.scrollTop = mainContext.prevScroll[mainContext.prevScroll.length-1]
+				const newPrevScroll = mainContext.prevScroll
+				newPrevScroll.pop()
+				mainContext.setPrevScroll(newPrevScroll)
+			}
+		} else if(location.state !== undefined && location.state.redirect !== undefined && location.state.redirect === 'FORWARD') {
+			if(getAppBodyWrapperRef().current !== undefined) {
+				const newPrevScroll = mainContext.prevScroll
+				newPrevScroll.push(mainContext.getCurrentScroll())
+				mainContext.setPrevScroll(newPrevScroll)
+				getAppBodyWrapperRef().current.scrollTop = 0
+			}
+		} else {
+			if(getAppBodyWrapperRef().current !== undefined) {
+				mainContext.setPrevScroll([0])
+				getAppBodyWrapperRef().current.scrollTop = 0
+			}
+		}
+	}, [location.pathname])
+	return null
+}
+
+// Transition Manager Component
+const TransitionManager = ({getAppBodyWrapperRef, children}) => {
+	const mainContext = useContext(MainContext)
+	
+	const location = useLocation()
+	
+	const mockupStyle = {
+		position: 'absolute', 
+		top: mainContext.navHeight+'px', 
+		left: 0, 
+		width: '100vw', 
+		height: '100vh', 
+		backgroundColor: mainContext.theme.secondaryBackgroundColor, 
+		transform: 'translateX(-100%)', 
+		zIndex: 2,
+		boxShadow: '-5px 0px 5px rgba(33, 33, 33, 0.2)',
+	}
+	
+	const createBookPreviewMockUp = () => {
+		return (
+			`<div dir="rtl" class="list" style="background-color: rgb(255, 255, 255);"><h1 class="list__title" style="color: rgb(46, 65, 78);"></h1><div class="list__wrapper list__wrapper__column webkit-scroll"><div class="list__card__column"><div dir="ltr" class="book-close-btn__wrapper"><button class="close-btn toggled"><span class="close-btn__top-line" style="background-color: rgb(46, 65, 78);"></span><span class="close-btn__bottom-line" style="background-color: rgb(46, 65, 78);"></span></button></div><div class="book-card__wrapper column"><div class="book-card__cover" style="background-color: ${mainContext.primaryBackgroundColor}; border-color: rgb(247, 249, 250);"></div><div class="book-card__text"><div><a href="#" style="text-decoration: none; color: rgb(46, 65, 78);"><div class="book-card__name" style="background-color: rgb(46, 65, 78); width: 30vw; height: 5vw; margin: 3vw; flex-grow: 2"></div></a><div class="book-card__writer" style="background-color: rgb(181, 181, 181); width: 30vw; height: 5vw; margin-bottom: 3vw"></div></div><div><div class="btn btn--outline "><button class="btn__button" style="background-color: transparent; color: rgb(46, 65, 78); border: 0.3vw solid rgb(46, 65, 78); border-top-left-radius: 1vw; border-top-right-radius: 1vw; border-bottom-right-radius: 1vw; border-bottom-left-radius: 1vw;">تومان</button></div></div></div><div class="desc-comments__wrapper"><div class="tab-btns__wrapper"><div><button class="tab-btn__button" style="background-color: rgb(46, 65, 78); color: rgb(248, 249, 251);">توضيحات</button><button class="tab-btn__button" style="background-color: rgb(248, 249, 251); color: rgb(46, 65, 78);">نظرات</button></div></div></div></div></div></div></div>`)
+	}
+	
+	const _mockupRef = useRef(null)
+	useEffect(() => {
+		mainContext.setEndCompMockUp({
+			callback: () => { 
+				return new Promise((resolve, reject) => {
+					_mockupRef.current.innerHTML = createBookPreviewMockUp()
+					_mockupRef.current.setAttribute('class', `${_mockupRef.current.getAttribute('class')} enter`)
+					setTimeout(() => {
+						_mockupRef.current.style.transform = 'translateX(-100%)'
+						_mockupRef.current.setAttribute('class', _mockupRef.current.className.replace(' enter', ''))
+						resolve(null)
+					}, 700)
+				})
+			}
+		})
+	}, [location.pathname])
+	
+	return (
+		<React.Fragment>
+			{children}
+			<div ref={_mockupRef} style={mockupStyle} className="book-preview__wrapper">
+			</div>
+		</React.Fragment>
 	)
 }
 
@@ -899,13 +1071,13 @@ const BookPreview = () => {
 	)
 }
 // Book Card
-const BookCard = ({view, book, information, onClickFn}) => {
+const BookCard = ({view, book, information, onClickFn, closeCallback}) => {
 	const {id, name, writer, translator, price, src} = book
 	const desc = book.desc || null
 	
 	var history = useHistory()
 	const location = useLocation()
-	
+
 	const context = useContext(MainContext)
 	
 	const [openTab, setOpenTab] = useState(0)
@@ -925,25 +1097,45 @@ const BookCard = ({view, book, information, onClickFn}) => {
 		onClickFn('')
 	}
 	
-	const redirectToBookPage = (e) => {
-		e.preventDefault()
-		history.push({pathname: `/book/${id}`, state:{prevPath: location.pathname}})
+	const redirectToBookPage = () => {
+		history.push({pathname: `/book/${id}`, state:{prevPath: location.pathname, redirect: 'FORWARD'}})
 	}
 	
 	const goToPrevPath = (e) => {
 		e.preventDefault()
-		history.push({pathname: location.state.prevPath, state:{prevPath: location.pathname}})
+		if (closeCallback !== undefined) {
+			closeCallback().then(res => {
+				history.push({pathname: location.state.prevPath, state:{prevPath: location.pathname, redirect: 'BACKWARD'}})
+			})
+		} else {
+			history.push({pathname: location.state.prevPath, state:{prevPath: location.pathname, redirect: 'BACKWARD'}})
+		}
+	}
+	
+	const transitionToBook = (e) => {
+		e.preventDefault()
+		if(!information) {
+			context.endCompMockUp.callback().then(res => {
+				redirectToBookPage()
+			})
+		}
 	}
 	
 	const handleTabClick = (idx) => setOpenTab(idx)
 	
 	return (
+		<React.Fragment>
+			{information && location.state !== undefined && location.state.prevPath !== undefined && location.state.redirect !== undefined &&
+				<div dir='ltr' className="book-close-btn__wrapper">
+					<CloseBtn toggled onClickFn={goToPrevPath} />
+				</div>
+			}
 		<div className={`book-card__wrapper ${view}`}>
-			<div className="book-card__cover" style={{backgroundImage: `url("https://raw.githubusercontent.com/Alimobasheri/best-book/master/assets/${src}")`, borderColor: context.theme.bookCoverBorderColor}} onClick={redirectToBookPage}>
+			<div className={`book-card__cover ${!information ? 'fade' : ''}`} style={{backgroundImage: `url("assets/${src}")`, borderColor: context.theme.bookCoverBorderColor}} onClick={transitionToBook}>
 			</div>
 			<div className="book-card__text">
 				<div>
-					<div className="book-card__name" style={{color: context.theme.primaryFontColor}}>{name}</div>
+					<Link to={{pathname: `/book/${id}`, state: {prevPath: location.pathname, redirect: 'FORWARD'}}} style={{textDecoration:'none', color: context.theme.primaryFontColor}}><div className="book-card__name" style={{color: context.theme.primaryFontColor}} onClick={transitionToBook}>{name}</div></Link>
 					<div className="book-card__writer" style={{color: context.theme.secondaryFontColor}}>{writer}{translator && translator != 'false' && <span className="book-card__translator" style={{color: context.theme.secondaryFontColor}}> \ {translator}</span>}</div>
 				</div>
 				<div>
@@ -952,9 +1144,6 @@ const BookCard = ({view, book, information, onClickFn}) => {
 			</div>
 			{information && 
 				<React.Fragment>
-					<div className="book-close-btn__wrapper">
-						<CloseBtn toggled onClickFn={goToPrevPath} />
-					</div>
 					<div className="desc-comments__wrapper">
 						<div className="tab-btns__wrapper">
 							<TabBtn titles={['توضيحات', 'نظرات']} onClickFn={handleTabClick} activeIdx={openTab}/>
@@ -968,6 +1157,7 @@ const BookCard = ({view, book, information, onClickFn}) => {
 				</React.Fragment>
 			}
 		</div>
+		</React.Fragment>
 	)
 }
 
@@ -1059,32 +1249,56 @@ const SearchBar = (props) => {
 // Navigatin Menu
 const Nav = () => {
 	const [toggled, setToggled] = useState(false)
+	
+	const mainContext = useContext(MainContext)
+	const location = useLocation()
+	
+	const changeNavHeight = () => {
+		mainContext
+			.setNavHeight(
+				window
+					.getComputedStyle(_navWrapper, null)
+					.getPropertyValue('height')
+					.split('px')[0]
+			)
+	}
+	
+	const activeNavStyle = {
+		borderBottomColor: `${mainContext.theme.primaryFontColor}`
+	}
+	
+	var _navWrapper
+	useEffect(() => changeNavHeight())
+	window.addEventListener('resize', changeNavHeight, false)
 	return(
-	<MainContext.Consumer>
-	{context =>
-	<div dir="rtl" className={`nav ${toggled ? 'toggled' : ''}`} style={{backgroundColor: context.theme.primaryBackgroundColor}}>
+	<div dir="rtl" className={`nav ${toggled ? 'toggled' : ''}`} style={{backgroundColor: mainContext.theme.primaryBackgroundColor}} ref={_nav => _navWrapper = _nav}>
 		<div className="nav__wrapper">
-			<div className="nav-brand__wrapper"><h1 className="nav-brand__h1" style={{color: context.theme.primaryFontColor}}>بست بوك</h1></div>
+			<Link to="/" style={{textDecoration: 'none'}}><div className="nav-brand__wrapper"><h1 className="nav-brand__h1" style={{color: mainContext.theme.primaryFontColor}}>بست بوك</h1></div>
+			</Link>
 			<div className="nav-hamburger">
-				<HamburgerButton lineColor={context.theme.primaryFontColor} toggled={toggled} toggle={setToggled}/>
+				<HamburgerButton lineColor={mainContext.theme.primaryFontColor} toggled={toggled} toggle={setToggled}/>
 			</div>
 		</div>
 		<div className={`nav-items__wrapper ${toggled ? 'toggled' : ''}`}>
-			<div><Link to="/" style={{textDecoration: 'none'}}><span className='link-item' style={{color: context.theme.primaryFontColor}}>خانه</span></Link></div>
-			<div><Link to="about-us" style={{textDecoration: 'none'}}><span className='link-item' style={{color: context.theme.primaryFontColor}}>درباره</span></Link></div>
-			<div><Link to="contact" style={{textDecoration: 'none'}}><span className='link-item' style={{color: context.theme.primaryFontColor}}>تماس با ما</span></Link></div>
+			<div><Link exact to="/" style={{textDecoration: 'none'}}><span className={`link-item ${location.pathname == '/' ? 'active' : ''}`} style={{color: mainContext.theme.primaryFontColor, borderBottomColor: mainContext.theme.primaryFontColor}}>خانه</span></Link></div>
+			<div><Link to="/about-us" style={{textDecoration: 'none'}}><span className={`link-item ${location.pathname == '/about-us' ? 'active' : ''}`} style={{color: mainContext.theme.primaryFontColor, borderBottomColor: mainContext.theme.primaryFontColor}}>درباره</span></Link></div>
+			<div><Link to="/contact" style={{textDecoration: 'none'}}><span className={`link-item ${location.pathname == '/contact' ? 'active' : ''}`} style={{color: mainContext.theme.primaryFontColor, borderBottomColor: mainContext.theme.primaryFontColor}}>تماس با ما</span></Link></div>
 			<Btn text='ورود' navButton outline/>
 			<Btn text='عضويت' navButton />
 			<ThemeSwitch />
 		</div>
 	</div>
-	}
-	</MainContext.Consumer>
 	)
 }
 
 //Home
 const Home = (props) => {
+	const mainContext = useContext(MainContext)
+	const location = useLocation()
+	
+	const innerHeight = window.innerHeight
+	
+	var _homeWrapper = useRef(null)
 	return (
 		<MainContext.Consumer>
 		{context => {
@@ -1104,7 +1318,7 @@ const Home = (props) => {
 				[] : 
 				<List view={'column'} className="results-list" books={[...books].filter(book => book.name.includes(searchText) || book.writer.includes(searchText) || book.translator.includes(searchText))} />
 			return(
-				<div dir="rtl" className='home__wrapper'>
+				<div dir="rtl" className='home__wrapper' ref={_homeWrapper}>
 					<SearchBar />
 					{searchText == '' ? 
 						homePage : 
@@ -1148,31 +1362,40 @@ const AboutUs = () => {
 
 //App
 const App = () => {
-	const rootPath ="/Best Book/index.html"
+	const mainContext = useContext(MainContext)
+	const location = useLocation()
+	
+	var _appBodyWrapper = useRef(null)
+	
+	const getAppBodyWrapper = () => {
+		return _appBodyWrapper
+	}
+	
 	return (
-		<MainProvider>
-			<MainContext.Consumer>
-			{context =>
-				<React.Fragment>
-					<div className='app-wrapper' style={{backgroundColor: context.theme.primaryBackgroundColor}}>
-						<Nav />
-						<Switch>
-							<Route path={`/about-us`} component={AboutUs}/>
-							<Route path={`/book/:id`} component={BookPreview} />
-							<Route path={`/`} component={Home} exact/>
-						</Switch>
-					</div>
-				</React.Fragment>
-			}
-			</MainContext.Consumer>
-		</MainProvider>
+		<React.Fragment>
+			<div className='app-wrapper' style={{backgroundColor: mainContext.theme.primaryBackgroundColor}}>
+				<Nav />
+				<TransitionManager getAppBodyWrapperRef={getAppBodyWrapper}>
+				<div className='app-body__wrapper' ref={_appBodyWrapper}>
+					<ScrollManager getAppBodyWrapperRef={getAppBodyWrapper} />
+					<Switch>
+						<Route path={`/about-us`} component={AboutUs}/>
+						<Route path={`/book/:id`} component={BookPreview} />
+						<Route path={`/`} component={Home} exact/>
+					</Switch>
+				</div>
+				</TransitionManager>
+			</div>
+		</React.Fragment>
 	)
 }
 
 const root = document.querySelector('#root')
 render(
-	<HashRouter> 
-		<App />
+	<HashRouter>
+		<MainProvider>
+			<App />
+		</MainProvider>
 	</HashRouter>, 
 	root
 )
