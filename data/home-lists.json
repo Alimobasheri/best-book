@@ -1,15 +1,15 @@
 {
 	"HOME_LISTS": ["BEST_SELLING", "NEWEST", "HISTORICAL"],
 	"BEST_SELLING": {
-		"title": "Ù¾Ø±ÙØ±ÙˆØ´ØªØ±ÙŠÙ† Ù‡Ø§",
+		"title": "پرفروشترین ها",
 		"books_ids": ["K9E16P9091O9", "K9E16P90JY6O", "FBE6368", "A6C6B48", "24C2D88", "28BE6C8", "7875B48"]
 	},
 	"NEWEST": {
-		"title": "ØªØ§Ø²Ù‡ ØªØ±ÙŠÙ† Ù‡Ø§",
+		"title": "تازه ترین ها",
 		"books_ids": ["FEDA748", "K9E16P90RXP6", "E3919C8", "B0D5508", "6D2CF88", "9963128"]
 	},
 	"HISTORICAL": {
-		"title": "Ø§Ø² ØªØ§Ø±ÙŠØ® Ø¨Ø®ÙˆØ§Ù†ÙŠØ¯",
+		"title": "از تاریخ بخوانید",
 		"books_ids": ["K9E16P90JY6O", "A6C6B48", "06F34A8", "28BE6C8", "E8EFF48", "E3C9A88"]
 	}
 }
