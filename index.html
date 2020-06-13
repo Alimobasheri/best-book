@@ -1062,14 +1062,25 @@ const BookPreview = () => {
 	
 	const {books} = mainContext
 	
+	const _wrapperRef = useRef(null)
+	const slideOut = () => { 
+		return new Promise((resolve, reject) => {
+			_wrapperRef.current.setAttribute('class', `book-preview__wrapper exit`)
+			setTimeout(() => {resolve(null)}, 700)
+		})
+	}
+	
 	const bookPreview = 
-		<List view={'column'} title={''} books={[...books].filter(book => book.id == id)} information />
+		<List view={'column'} title={''} books={[...books].filter(book => book.id == id)} information closeCallback={slideOut} />
 	return (
-		<div dir="rtl" className="book-preview__wrapper">
-			{bookPreview}
-		</div>
+		<React.Fragment>
+			<div ref={_wrapperRef} dir="rtl" className="book-preview__wrapper" >
+				{bookPreview}
+			</div>
+		</React.Fragment>
 	)
 }
+
 // Book Card
 const BookCard = ({view, book, information, onClickFn, closeCallback}) => {
 	const {id, name, writer, translator, price, src} = book
