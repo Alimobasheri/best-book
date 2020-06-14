@@ -1,5 +1,3 @@
-const {useState, useEffect} = React
-
 const Home = (props) => {
 	return (
 		<MainContext.Consumer>
