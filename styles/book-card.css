@@ -34,6 +34,10 @@
 	align-items: center;
 }
 
+.book-card__wrapper.column > .book-card__cover {
+	min-width: 23vw;
+}
+
 .book-card__wrapper.row { 
 	display: flex;
 	flex-direction: column;
@@ -123,9 +127,10 @@
 	}
 	
 	.book-card__wrapper.column > .book-card__cover {
-		width: 18vw;
-		min-width: 18vw;
-		max-width: 18vw;
+		width: 12vw;
+		min-width: 12vw;
+		max-width: 12vw;
+		min-height: 15.6vw;
 	}
 
 	.book-card__text {
