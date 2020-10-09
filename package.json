@@ -1,0 +1,26 @@
+{
+  "name": "best-book",
+  "version": "0.7.0",
+  "description": "A persian book-store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alimobasheri/best-book.git"
+  },
+  "keywords": [
+    "Next.js",
+    "reactjs",
+    "book",
+    "store",
+    "front-end"
+  ],
+  "author": "a.mobasheri@icloud.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alimobasheri/best-book/issues"
+  },
+  "homepage": "https://github.com/Alimobasheri/best-book#readme"
+}
