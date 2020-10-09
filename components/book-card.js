@@ -78,7 +78,7 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 					<RatingStars rating={parseFloat(rating)} rates={parseInt(rates)} />
 				</div>
 				<div>
-					<Btn text={`${toFarsiDigits(price)} تومان`} outline fullWidth />
+					<Btn text={`${toFarsiDigits(price)} تومان`} outline fullWidth={view === 'row'} />
 				</div>
 			</div>
 			{information && 
