@@ -1,3 +1,5 @@
+import HEAD from 'next/head'
+
 import '../styles/globals.css'
 import '../styles/index.css'
 import '../styles/home.css'
@@ -33,6 +35,9 @@ const MainApp = ({ Component, pageProps }) => {
 
   return (
       <React.Fragment>
+        <HEAD>
+          <title>بست بوک</title>
+        </HEAD>
 			  <div dir='rtl' className='app-wrapper' style={{backgroundColor: mainContext.theme.primaryBackgroundColor}}>
 				  <TransitionManager getAppBodyWrapperRef={getAppBodyWrapper}>
 				  <Nav />

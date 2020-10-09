@@ -1,3 +1,5 @@
+import HEAD from 'next/head'
+
 import MainContext from '../../contexts/main-context'
 
 export default function AboutUs () {
@@ -5,6 +7,9 @@ export default function AboutUs () {
 		<MainContext.Consumer>
 		{context =>
 			<div dir="rtl" className="about-us__wrapper">
+                <HEAD>
+                    <title>بست بوک | درباره ما</title>
+                </HEAD>
 				<article className="about-us__article" style={{backgroundColor: context.theme.secondaryBackgroundColor}}>
 					<header className="about-us__article__header">
 						<h1 className="about-us__article__h1 bb-typography__header" style={{color: context.theme.primaryFontColor}}>

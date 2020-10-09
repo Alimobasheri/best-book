@@ -1,3 +1,5 @@
+import HEAD from 'next/head'
+
 import MainContext from '../contexts/main-context'
 
 import List from '../components/list'
@@ -24,6 +26,9 @@ export default function Home() {
 				<List view={'column'} className="results-list" books={[...books].filter(book => book.name.includes(searchText) || book.writer.includes(searchText) || book.translator.includes(searchText))} />
 			return(
 				<div dir="rtl" className='home__wrapper'>
+          <HEAD>
+            <title>بست بوک | خانه</title>
+          </HEAD>
 					<div className='home__search-bar'><SearchBar responsive={true}/></div>
 					{searchText == '' ? 
 						homePage : 
