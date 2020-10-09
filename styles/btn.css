@@ -1,0 +1,44 @@
+.btn {
+	padding: 2% 0;
+}
+
+.btn__button {
+	/*font-size: 4vw;*/
+	padding: 0.5vw 3vw;
+	border-radius: 1vw;
+}
+
+.btn--outline > .btn__button {
+	border: 0.3vw solid;
+}
+
+.btn--nav > .btn__button {
+	font-size: 7vw;
+}
+
+@media only screen and (min-width: 768px) {
+	.btn__button {
+		/*font-size: 3vw;*/
+		padding: 0.5vw 1.5vw;
+	}
+	
+	.btn--nav > .btn__button {
+		font-size: 3vw;
+	}
+}
+
+@media only screen and (min-width: 1200px) and (min-height: 300px) {
+	.btn__button {
+		/*font-size: 1.8vw;*/
+		padding: 0.1vw 0.4vw;
+	}
+
+	.btn--outline > .btn__button {
+		border-width: 0.1vw;
+		border-radius: 0.3vw;
+	}
+	
+	.btn--nav > .btn__button {
+		font-size: 1.8vw;
+	}
+}

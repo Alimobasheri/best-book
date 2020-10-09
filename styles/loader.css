@@ -1,0 +1,31 @@
+@keyframes ping {
+	0% {
+		-webkit-transform: scale(0.2);
+		transform: scale(0.2);
+		opacity: 0.8;
+	}
+	
+	80% {
+		-webkit-transform: scale(1.2);
+		transform: scale(0.2);
+		opacity: 0;
+	}
+	
+	100% {
+		-webkit-transform: scale(2.2);
+		transform: scale(2.2);
+		opacity: 0;
+	}
+}
+
+.ping {
+	-webkit-animation: ping 0.8s cubic-bezier(0.190, 1.000, 0.220, 1.000) infinite both;
+	animation: ping 0.8s cubic-bezier(0.190, 1.000, 0.220, 1.000) infinite both;
+}
+
+.loader {
+	width: 10vw;
+	height: 10vw;
+	border-radius: 50%;
+	display: block;
+}

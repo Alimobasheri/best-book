@@ -1,0 +1,117 @@
+*, *:before, *:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body, #root {
+	height: 100vh !important;
+	width: 100vw !important;
+}
+
+body {
+	background-color: #F8F9FB;
+	overflow: hidden;
+	/*display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;*/
+}
+
+#root {
+	overflow: hidden;
+}
+
+.app-wrapper {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.app-body__wrapper {
+	padding: 1vh 0;
+	z-index: 0;
+	margin-top: 0;
+	padding-bottom: 0;
+	min-width: 100vw;
+	max-width: 100vw;
+	height: 90vh;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+.bb-typography__header {
+	font-size: 3.5vw;
+}
+
+.bb-typography__title {
+	font-size: 3vw;
+}
+
+.bb-typography__title2 {
+	font-size: 2.5vw;
+}
+
+.bb-typography__body {
+	font-size: 2vw;
+}
+
+@media only screen and (min-width: 768px) {
+	.bb-typography__header {
+		font-size: 2.3vw;
+	}
+
+	.bb-typography__title {
+		font-size: 1.8vw;
+	}
+
+	.bb-typography__title2 {
+		font-size: 1.4vw;
+	}
+
+	.bb-typography__body {
+		font-size: 1.1vw;
+	}
+}
+
+@media only screen and (min-width: 1200px) and (min-height: 300px) {
+	.bb-typography__header {
+		font-size: 1.5vw;
+	}
+
+	.bb-typography__title {
+		font-size: 1vw;
+	}
+
+	.bb-typography__title2 {
+		font-size: 0.8vw;
+	}
+
+	.bb-typography__body {
+		font-size: 0.7vw;
+	}
+
+	.app-wrapper {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+		overflow-x: hidden;
+	}
+
+	#__next {
+		height: 100%;
+	}
+
+	.app-body__wrapper {
+		padding: 3vh 0;
+		margin-top: 0;
+		padding-bottom: 0;
+		z-index: 1;
+		min-width: 85%;
+		max-width: 85%;
+		height: 100vh;
+		overflow-x: hidden;
+	}
+}

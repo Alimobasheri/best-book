@@ -1,0 +1,134 @@
+@keyframes fast-fade-in {
+	0% {opacity: 0; transform: scale(0)}
+	100%{opacity: 1; transform: scale(1)}
+}
+
+.book-card__wrapper {
+	min-width: 100%;
+	max-width: 100%;
+	height: auto;
+}
+
+.book-card__cover {
+	background-size: 100% 100%;
+	display: block;
+	height: 30vw;
+	content: "";
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	border: 2pt solid;
+	/*box-shadow:
+		4px 4px 4px rgba(0, 0, 0, 0.2),
+		8px 8px 8px rgba(0, 0, 0, 0.1);*/
+}
+.book-card__cover.fade{
+	opacity: 0;
+	animation: fast-fade-in 0.5s 0.1s forwards;
+}
+
+.book-card__wrapper.column {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.book-card__wrapper.row { 
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.book-card__wrapper.row > .book-card__cover {
+	min-width: 100%;
+	max-width: 100%;
+	flex: 2;
+	flex-shrink: 3;
+}
+
+.book-card__text {
+	width: 100%;
+	min-height: 30vw;
+	flex-basis: 2;
+	flex-grow: 5;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	padding: 0 2vw;
+}
+.book-card__wrapper.column > .book-card__text {
+	width: 50%;
+}
+.book-card__wrapper.row > .book-card__text {
+	padding: 1vh 0;
+}
+
+.book-card__name, .book-card__price {
+	color: #2E414E;
+}
+
+.book-card__writer, .book-card__translator {
+	color: #B5B5B5;
+}
+
+.book-close-btn__wrapper {
+	position: relative;
+	text-align: left;
+}
+
+.desc-comments__wrapper {
+	min-width: 100%;
+	max-width: 100%;
+	padding: 2vh 0;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.desc-comments__wrapper__desc__text {
+	padding: 2vh 4vw;
+}
+
+@media only screen and (max-width: 767px) {
+	.book-card__cover {
+		min-height: 39vw;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.book-card__cover {
+		min-height: 26vw;
+	}
+	.book-card__cover.fade {
+		height: 26vw;
+	}
+	
+	.book-card__wrapper.column > .book-card__cover {
+		width: 25vw;
+	}
+}
+
+@media only screen and (min-width: 1200px) and (min-height: 300px) {
+	.book-card__cover {
+		min-height: 13vw;
+	}
+	.book-card__cover.fade {
+		height: 13vw;
+	}
+	
+	.book-card__wrapper.column > .book-card__cover {
+		width: 18vw;
+		min-width: 18vw;
+		max-width: 18vw;
+	}
+
+	.book-card__text {
+		min-height: 8vw;
+	}
+}

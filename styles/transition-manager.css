@@ -1,0 +1,27 @@
+.fake__wrapper {
+	overflow: hidden;
+}
+
+.initial-transition {
+	width: 100vw;
+	height: 100vh;
+	background-color: inherit;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: no-wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.initial-transition > div {
+	max-height: 33vh;
+	min-height: 33vh;
+}
+
+.initial-transition > .initial-transition__brand {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}

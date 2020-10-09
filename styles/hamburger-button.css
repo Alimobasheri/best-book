@@ -1,0 +1,55 @@
+.nav-hamburger__btn {
+	width: 12vw;
+	height: 7.2vw;
+	background: none;
+	border: none;
+	padding: 1vw;
+	cursor: pointer;
+}
+.nav-hamburger__wrapper {
+	width: 100%;
+	min-height: 100%;
+	position: relative;
+}
+.nav-hamburger__wrapper > span {
+	content: "";
+	display: block;
+	width: 100%;
+	height: 1.2vw;
+	position: absolute;
+	background-color: #2E414E;
+	transform: translateY(-50%);
+	transition: top 0.5s 0.5s ease;
+	transition: transform 0.5s ease;
+}
+.nav-hamburger__wrapper > span:nth-child(1) {
+	transition: all 0.5s ease;
+	top: -1.2vw;
+}
+.nav-hamburger__wrapper > span:nth-child(2) {
+	margin-top: -0.6vw;
+	top: 50%;
+}
+.nav-hamburger__wrapper > span:nth-child(3) {
+	bottom: -1.2vw;
+}
+
+.nav-hamburger__wrapper.toggled > span {
+	transition: top 0.5s 0.5s ease;
+	transition: transform 0.5s ease;
+}
+.nav-hamburger__wrapper.toggled > span:nth-child(1) {
+	transition: all 0.5s ease;
+	width: 0;
+	opacity: 0;
+}
+.nav-hamburger__wrapper.toggled > span:nth-child(2) {
+	transform-origin: center;
+	transform: rotateZ(45deg);
+}
+.nav-hamburger__wrapper.toggled > span:nth-child(3) {
+	transform-origin: center;
+	margin-top: -0.6vw;
+	top: 50%;
+	transform: rotateZ(-45deg);
+}

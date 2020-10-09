@@ -1,0 +1,29 @@
+.about-us__article {
+	padding: 0 2vw;
+	height: auto;
+}
+
+.about-us__article__h1 {
+	/*font-size: 6vw;*/
+	padding-bottom: 2vh;
+}
+
+.about-us__article__text {
+	padding: 2vh 4vw;
+	/*font-size: 4vw;*/
+}
+
+@media only screen and (min-width: 1200px) and (min-height: 300px) {
+	.about-us__wrapper {
+		padding: 5%;
+	}
+
+	.about-us__article {
+		padding: 5vh 4vw;
+		border-radius: 25px;
+	}
+
+	.about-us__article__h1 {
+		padding: 2vh 1vw;
+	}
+}

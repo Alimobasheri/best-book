@@ -1,0 +1,15 @@
+.no-rating__text {
+	font-size: 3vw;
+}
+
+@media only screen and (min-width: 768px) {
+	.no-rating__text {
+		font-size: 2.5vw;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.no-rating__text {
+		font-size: 1.8vw;
+	}
+}
