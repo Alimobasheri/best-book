@@ -1,8 +1,10 @@
 import {useContext, useState, useRef} from 'react'
 //const {useHistory, useLocation, Link} = ReactRouterDOM
+import {useRouter} from 'next/router'
 import Link from 'next/link'
 
 import MainContext from '../contexts/main-context'
+
 import Btn from './btn'
 import CloseBtn from './close-btn'
 import TabBtn from './tab-btn'
@@ -15,6 +17,8 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 	
 	//var history = useHistory()
 	//const location = useLocation()
+
+	const router = useRouter()
 
 	const context = useContext(MainContext)
 	
@@ -36,17 +40,17 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 	}
 	
 	const redirectToBookPage = () => {
-		history.push({pathname: `/book/${id}`, state:{prevPath: location.pathname, redirect: 'FORWARD'}})
+		router.push({pathname: `/book/${id}`, query:{prevPath: location.pathname, redirect: 'FORWARD'}})
 	}
 	
 	const goToPrevPath = (e) => {
 		e.preventDefault()
 		if (closeCallback !== undefined) {
 			closeCallback().then(res => {
-				history.push({pathname: location.state.prevPath, state:{prevPath: location.pathname, redirect: 'BACKWARD'}})
+				router.push({pathname: router.query.prevPath, query:{prevPath: router.pathname, redirect: 'BACKWARD'}})
 			})
 		} else {
-			history.push({pathname: location.state.prevPath, state:{prevPath: location.pathname, redirect: 'BACKWARD'}})
+			router.push({pathname: router.query.prevPath, query:{prevPath: router.pathname, redirect: 'BACKWARD'}})
 		}
 	}
 	
@@ -63,17 +67,28 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 	
 	return (
 		<React.Fragment>
-			{information && location.state !== undefined && location.state.prevPath !== undefined && location.state.redirect !== undefined &&
-				<div dir='ltr' className="book-close-btn__wrapper">
-					<CloseBtn toggled onClickFn={goToPrevPath} />
+			{information && router.query !== undefined && router.query.prevPath !== undefined && router.query.redirect !== undefined &&
+				<div 
+				dir='ltr' 
+				className="book-close-btn__wrapper">
+					<CloseBtn 
+					toggled 
+					onClickFn={goToPrevPath} />
 				</div>
 			}
-		<div className={`book-card__wrapper ${view}`}>
-			<div className={`book-card__cover ${!information ? 'fade' : ''}`} style={{backgroundImage: `url("./assets/${src}")`, borderColor: context.theme.bookCoverBorderColor}} onClick={transitionToBook}>
+		<div className={`book-card__wrapper ${view} ${information && 'full-width'}`}>
+			<div 
+			className={`book-card__cover ${!information ? 'fade' : ''}`}  
+			onClick={transitionToBook}>
+				<span className='book-card__cover__img' style={{
+				backgroundImage: `url("/assets/${src}")`, 
+				borderColor: context.theme.bookCoverBorderColor}}></span>
 			</div>
-			<div className="book-card__text">
+			<div 
+			className="book-card__text">
 				<div>
-					<Link href={{pathname: `/book/${id}`, state: {prevPath: location.pathname, redirect: 'FORWARD'}}} style={{textDecoration:'none', color: context.theme.primaryFontColor}}><div className="book-card__name bb-typography__title2" style={{color: context.theme.primaryFontColor}} onClick={transitionToBook}>{name}</div></Link>
+					<Link 
+					href={{pathname: `/book/${id}`, query: {prevPath: router.pathname, redirect: 'FORWARD'}}} style={{textDecoration:'none', color: context.theme.primaryFontColor}}><div className="book-card__name bb-typography__title2" style={{color: context.theme.primaryFontColor}} onClick={transitionToBook}>{name}</div></Link>
 					<div className="book-card__writer bb-typography__title2" style={{color: context.theme.secondaryFontColor}}>{writer}{translator && translator != 'false' && <span className="book-card__translator bb-typography__title2" style={{color: context.theme.secondaryFontColor}}> \ {translator}</span>}</div>
 					<RatingStars rating={parseFloat(rating)} rates={parseInt(rates)} />
 				</div>
@@ -95,6 +110,23 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 					</div>
 				</React.Fragment>
 			}
+			<style jsx>
+				{`
+					@media only screen and (min-width: 1200px) and (min-height: 300px) {
+						.book-card__wrapper.full-width > .book-card__cover {
+							background-color: ${context.theme.secondaryBackgroundColor};
+						}
+
+						.book-card__wrapper.column.full-width > .book-card__text {
+							background-color: ${context.theme.secondaryBackgroundColor};
+						}
+
+						.book-card__wrapper.column.full-width > .desc-comments__wrapper {
+							background-color: ${context.theme.secondaryBackgroundColor};
+						}
+					}
+				`}
+			</style>
 		</div>
 		</React.Fragment>
 	)
