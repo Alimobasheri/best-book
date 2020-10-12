@@ -6,15 +6,21 @@
 	/*font-size: 4vw;*/
 	padding: 0.5vw 3vw;
 	border-radius: 1vw;
+	transition: padding 0.3s ease;
+}
+
+.btn > .btn__button:hover {
+	cursor: pointer;
+	padding: 0.5vw 3.5vw;
 }
 
 .btn--outline > .btn__button {
 	border: 0.3vw solid;
 }
 
-.btn--nav > .btn__button {
+/*.btn--nav > .btn__button {
 	font-size: 7vw;
-}
+}*/
 
 @media only screen and (min-width: 768px) {
 	.btn__button {
@@ -22,23 +28,24 @@
 		padding: 0.5vw 1.5vw;
 	}
 	
-	.btn--nav > .btn__button {
-		font-size: 3vw;
+	.btn > .btn__button:hover {
+		cursor: pointer;
+		padding: 0.5vw 1.8vw;
 	}
 }
 
 @media only screen and (min-width: 1200px) and (min-height: 300px) {
 	.btn__button {
-		/*font-size: 1.8vw;*/
-		padding: 0.1vw 0.4vw;
+		padding: 0.5vw 1vw;
+		border-radius: 0.5vw;
 	}
 
 	.btn--outline > .btn__button {
 		border-width: 0.1vw;
-		border-radius: 0.3vw;
 	}
 	
-	.btn--nav > .btn__button {
-		font-size: 1.8vw;
+	.btn > .btn__button:hover {
+		cursor: pointer;
+		padding: 0.5vw 1.2vw;
 	}
 }
