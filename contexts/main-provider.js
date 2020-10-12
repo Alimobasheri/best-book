@@ -3,6 +3,8 @@ import MainContext from './main-context'
 import {useEffect, useState} from 'react'
 
 const MainProvider = (props) => {
+	const [signInField, setSignInField] = useState({email: '', password: ''})
+
     const theme = {
 		light: {
 			primaryBackgroundColor: "#F8F9FB",
@@ -64,6 +66,8 @@ const MainProvider = (props) => {
 	const [endCompMockUp, setEndCompMockUp] = useState('')
 	
 	const contextValue = {
+		signInField,
+		setSignInField,
 		allIsLoaded: () => {return true},
 		books: data.books,
 		homeLists,
