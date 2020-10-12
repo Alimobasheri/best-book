@@ -1,9 +1,12 @@
 .tab-btn__button {
 	padding: 1vh 2vw;
 	margin: 0;
-	font-size: 3vw;
 	border: none;
 	border-radius: 0;
+}
+
+.tab-btn__button:hover {
+	cursor: pointer;
 }
 
 .tab-btn__button:first-child {
@@ -20,7 +23,6 @@
 	.tab-btn__button {
 		padding: 0.7vh 1.5vw;
 		margin: 0;
-		font-size: 2.3vw;
 	}
 
 	.tab-btn__button:first-child {
