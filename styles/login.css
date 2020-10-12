@@ -26,28 +26,29 @@
 }
 
 .login__title {
-	font-size: 4vw;
+	/*font-size: 4vw;*/
 	line-height: 4.6vw;
 	padding: 2vh 0;
 	margin-bottom: 2vh;
 }
 
 .login__label {
-	font-size: 3vw;
+	/*font-size: 3vw;*/
 	padding-bottom: 2vh;
 }
 
 .login__label > span {
 	padding: 1vh 2vw;
-	font-size: 2vw;
+	/*font-size: 2vw;*/
 }
 
 .login__text-input {
 	border: none;
-	font-size: 2.8vw;
+	/*font-size: 2.8vw;*/
 	display: block;
 	width: 100%;
 	padding: 2vh 2vw;
+	border: 1px solid transparent;
 }
 .login__text-input:focus {
 	border: 1px solid #2E41E4;
@@ -55,13 +56,13 @@
 
 @media only screen and (min-width: 768px) {
 	.login__title {
-		font-size: 2.8vw;
+		/*font-size: 2.8vw;*/
 		line-height: 3.2vw;
 		padding: 1.8vh 0;
 	}
 
 	.login__label {
-		font-size: 2.3vw;
+		/*font-size: 2.3vw;*/
 		padding-bottom: 1.5vh;
 		width: 100%;
 		display: flex;
@@ -73,17 +74,24 @@
 
 	.login__label > span {
 		padding: 0.7vh 1.5vw;
-		font-size: 1.6vw;
+		/*font-size: 1.6vw;*/
 		width: 100%;
 		text-align: left;
 	}
 
 	.login__text-input {
-		font-size: 2vw;
+		/*font-size: 2vw;*/
 		padding: 1.5vh 1.5vw;
 		width: 66.666%;
 	}
 	.login__text-input:focus {
 		border: 2px solid #2E41E4;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.login__form__wrapper {
+		width: 75%;
+		max-width: 75%;
 	}
 }
