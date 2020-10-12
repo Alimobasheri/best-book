@@ -11,10 +11,10 @@ export default function List ({view, title, books, information, closeCallback}) 
 	return (
 		<MainContext.Consumer>
 		{context =>
-		<div className="list" style={{backgroundColor: context.theme.secondaryBackgroundColor}}>
+		<div className={`list ${information && 'full-width'}`}>
 			<h1 className="list__title bb-typography__title" style={{color: context.theme.primaryFontColor}}>{title}</h1>
 			{books && books.length > 0 ?
-				<div className={`list__wrapper list__wrapper__${view == 'column' ? 'column' : 'row'} ${scroll ? 'webkit-scroll' : ''}`} >
+				<div className={`list__wrapper list__wrapper__${view == 'column' ? 'column' : 'row'} ${information && 'full-width'} ${scroll ? 'webkit-scroll' : ''}`} >
 					{
 						books.map((book, i) =>
 							<div className={`list__card__${view}`} key={i}>
@@ -25,6 +25,18 @@ export default function List ({view, title, books, information, closeCallback}) 
 				</div> :
 				<h1 className="empty-list__text" style={{color: context.theme.secondaryFontColor}}>كتابى موجود نمى باشد.</h1>
 			}
+			<style jsx>
+				{`
+					.list {
+						background-color: ${context.theme.secondaryBackgroundColor}
+					}
+					@media only screen and (min-width: 1200px) and (min-height: 300px) {
+						.list.full-width {
+							background-color: transparent;
+						}
+					}
+				`}
+			</style>
 		</div>
 		}
 		</MainContext.Consumer>

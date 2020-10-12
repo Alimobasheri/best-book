@@ -90,10 +90,19 @@
 	.list {
 		border-radius: 25px;
 		margin-bottom: 2vh;
+		padding: 0.5vh;
 	}
 	.list__wrapper__row {
 		flex-wrap: wrap;
 		padding: 2vh 2vw;
+	}
+	.list__wrapper__column {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.list__wrapper__column.full-width {
+		flex-wrap: nowrap;
 	}
 	.list__title {
 		padding-bottom: 4vh;
@@ -105,9 +114,13 @@
 	}
 
 	.list__card__column {
+		min-width: 40% !important;
+		max-width: 40% !important;
+		margin: 1vh 0;
+	}
+	.list__wrapper__column.full-width > .list__card__column {
 		min-width: 100% !important;
 		max-width: 100% !important;
-		margin: 1vh 0;
 	}
 
 	.webkit-scroll {
