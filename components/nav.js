@@ -96,7 +96,7 @@ export default function Nav(){
 				{/*{!mainContext.authentication().authenticated ? */}
 					{/*(*/}<React.Fragment>
 						<Link href="/login" style={{textDecoration: 'none'}}><Btn text='ورود' navButton outline/></Link>
-						<Link href="/sign-up" style={{textDecoration: 'none'}}><Btn text='عضويت' navButton /></Link>
+						<Link href="/signup" style={{textDecoration: 'none'}}><Btn text='عضويت' navButton /></Link>
 					</React.Fragment>{/*) :*/}
 					{/*<React.Fragment>
 						<Link href="/logout" style={{textDecoration: 'none'}}><Btn text='خروج' navButton outline/></Link>
