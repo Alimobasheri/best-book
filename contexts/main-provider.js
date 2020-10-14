@@ -68,7 +68,7 @@ const MainProvider = (props) => {
 	const contextValue = {
 		signInField,
 		setSignInField,
-		allIsLoaded: () => {return true},
+		allIsLoaded: () => {return !data.isFetching},
 		books: data.books,
 		homeLists,
 		themeMode, 
