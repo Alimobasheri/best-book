@@ -1,11 +1,13 @@
 import MainContext from '../contexts/main-context'
 import {useEffect, useContext} from 'react'
 //const {useLocation} = ReactRouterDOM
+import {useRouter} from 'next/router'
 
 export default function ScrollManager ({getAppBodyWrapperRef}) {
 	const mainContext = useContext(MainContext)
 	
 	//const location = useLocation()
+	const router = useRouter()
 	
 	useEffect( () => {
 		getAppBodyWrapperRef().current.addEventListener('scroll', () => {
@@ -13,15 +15,15 @@ export default function ScrollManager ({getAppBodyWrapperRef}) {
 		}, false)
 	}, [])
 	
-	/*useEffect(() => {
-		if (location.state !== undefined && location.state.redirect !== undefined && location.state.redirect === 'BACKWARD') {
+	useEffect(() => {
+		if (router.query !== undefined && router.query.redirect !== undefined && router.query.redirect === 'BACKWARD') {
 			if(getAppBodyWrapperRef().current !== undefined) {
 				getAppBodyWrapperRef().current.scrollTop = mainContext.prevScroll[mainContext.prevScroll.length-1]
 				const newPrevScroll = mainContext.prevScroll
 				newPrevScroll.pop()
 				mainContext.setPrevScroll(newPrevScroll)
 			}
-		} else if(location.state !== undefined && location.state.redirect !== undefined && location.state.redirect === 'FORWARD') {
+		} else if(router.query !== undefined && router.query.redirect !== undefined && router.query.redirect === 'FORWARD') {
 			if(getAppBodyWrapperRef().current !== undefined) {
 				const newPrevScroll = mainContext.prevScroll
 				newPrevScroll.push(mainContext.getCurrentScroll())
@@ -34,6 +36,6 @@ export default function ScrollManager ({getAppBodyWrapperRef}) {
 				getAppBodyWrapperRef().current.scrollTop = 0
 			}
 		}
-	}, [location.pathname])*/
+	}, [router.pathname])
 	return null
 }
