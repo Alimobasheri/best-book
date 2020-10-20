@@ -18,7 +18,7 @@ export default function Btn ({text, outline, id, navButton, fullWidth, onClick})
 			}
 			return(
 			<div className={`btn btn--${outline ? 'outline' : 'primary'} ${navButton ? 'btn--nav' : ''}`}>
-				<button className='btn__button bb-typography__title2' style={outline ? outlinedStyle : primaryStyle} onClick={onClick}>
+				<button className='btn__button bb-typography__title' style={outline ? outlinedStyle : primaryStyle} onClick={onClick}>
 					{text}
 				</button>
 			</div>
