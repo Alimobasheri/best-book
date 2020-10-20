@@ -10,6 +10,7 @@
     "deploy": "npm run build && npm run export"
   },
   "dependencies": {
+    "gotrue-js": "^0.9.27",
     "next": "9.5.4",
     "react": "16.13.1",
     "react-dom": "16.13.1"
