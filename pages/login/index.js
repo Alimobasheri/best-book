@@ -1,16 +1,21 @@
 import {useContext} from 'react'
 import Link from 'next/link'
+import {useRouter} from 'next/router'
 //const {Link} = ReactRouterDOM
 
 import MainContext from '../../contexts/main-context'
 
 import Btn from '../../components/btn'
+import { route } from 'next/dist/next-server/server/router'
+import { Router } from 'next/router'
 
 export default function Login() {
 	const mainContext = useContext(MainContext)
 	
-	const {authentication, setAuthentication, signIn, setSignInField, signInField} = mainContext
+	const {signIn, setSignInField, signInField} = mainContext
 	
+	const router = useRouter()
+
 	const handleChange = (event) => {
 		setSignInField({...signInField, [event.target.name]: event.target.value})
 	}
@@ -19,6 +24,12 @@ export default function Login() {
 		event.preventDefault()
 		//setAuthentication({authenticated: authentication.authenticated, loading: true})
 		signIn()
+			.then(response => {
+				router.push({pathname: '/'})
+			})
+			.catch(error => {
+				console.log(`Login Error: ${error}`)
+			})
 	}
 	
 	const loginWrapperStyle = {
