@@ -1,9 +1,18 @@
 import MainContext from './main-context'
+import auth from '../components/identity'
 
 import {useEffect, useState} from 'react'
 
 const MainProvider = (props) => {
 	const [signInField, setSignInField] = useState({email: '', password: ''})
+
+	const signUp = (email, password) => {
+		return auth.signup(email, password)
+	}
+
+	const signIn = () => {
+		return auth.login(signInField.email, signInField.password)
+	}
 
     const theme = {
 		light: {
@@ -68,6 +77,8 @@ const MainProvider = (props) => {
 	const contextValue = {
 		signInField,
 		setSignInField,
+		signUp,
+		signIn,
 		allIsLoaded: () => {return !data.isFetching},
 		books: data.books,
 		homeLists,
