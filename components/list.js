@@ -28,7 +28,12 @@ export default function List ({view, title, books, information, closeCallback}) 
 			<style jsx>
 				{`
 					.list {
-						background-color: ${context.theme.secondaryBackgroundColor}
+						background-color: transparent;
+					}
+					@media only screen and (min-width: 768px) {
+						.list {
+							background-color: ${context.theme.secondaryBackgroundColor}
+						}
 					}
 					@media only screen and (min-width: 1200px) and (min-height: 300px) {
 						.list.full-width {
