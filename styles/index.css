@@ -64,6 +64,12 @@ body {
 	font-size: 2vw;
 }
 
+.bb-typography__nav-link {
+	font-size: 6vw;
+	font-weight: 900px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 @media only screen and (min-width: 768px) {
 	.page-header {
 		font-size: 3.2vw;
@@ -87,6 +93,10 @@ body {
 
 	.bb-typography__body {
 		font-size: 1.1vw;
+	}
+
+	.bb-typography__nav-link {
+		font-size: 2vw;
 	}
 }
 
@@ -113,6 +123,10 @@ body {
 
 	.bb-typography__body {
 		font-size: 0.7vw;
+	}
+
+	.bb-typography__nav-link {
+		font-size: 1vw;
 	}
 
 	.app-wrapper {
