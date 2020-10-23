@@ -1,6 +1,6 @@
 .theme-switch {
-	width: 16vw;
-	height: 16vw;
+	width: 8.5vw;
+	height: 8.5vw;
 	position: relative;
 }
 
@@ -17,21 +17,21 @@
 
 .theme-switch__big-circle {
 	content: "";
-	width: 7vw;
-	height: 7vw;
+	width: 4.8vw;
+	height:4.8vw;
 	border-radius: 50%;
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 
 .theme-switch__small-circle {
-	width: 6vw;
-	height: 6vw;
+	width: 3.8vw;
+	height: 3.8vw;
 	border-radius: 50%;
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 66.66%;
 	transform: translate(-50%, -50%);
 	opacity: 1;
@@ -46,10 +46,10 @@
 
 @media only screen and (min-width: 768px) {
 	.theme-switch {
-		width: 5vw;
-		max-width: 40px;
-		height: 5vw;
-		max-height: 40px;
+		width: 4vw;
+		max-width: 50px;
+		height: 4vw;
+		max-height: 50px;
 	}
 
 	.theme-switch__btn {
@@ -61,6 +61,7 @@
 		max-width: 24px;
 		height: 3vw;
 		max-height: 24px;
+		top: 50%;
 	}
 
 	.theme-switch__small-circle {
@@ -68,5 +69,6 @@
 		max-width: 17.6px;
 		height: 2.7vw;
 		max-height: 21.6px;
+		top: 50%;
 	}
 }
