@@ -30,6 +30,11 @@ export default function Nav(){
 	
 	useEffect(() => changeNavHeight(), [])
 	useEffect(() => window.addEventListener('resize', changeNavHeight, false), [])
+	useEffect(() => {
+		if(toggled) {
+			setToggled(false)
+		}
+	}, [router.pathname])
 
 	return(
 		<div 
