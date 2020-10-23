@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 html, body, #root {
@@ -39,6 +40,14 @@ body {
 	-webkit-overflow-scrolling: touch;
 }
 
+.page-header {
+	font-size: 6vw;
+	line-height: 4.8vw;
+	font-weight: 900;
+	padding-bottom: 4vh;
+	padding-right: 6vw;
+}
+
 .bb-typography__header {
 	font-size: 3.5vw;
 }
@@ -56,6 +65,14 @@ body {
 }
 
 @media only screen and (min-width: 768px) {
+	.page-header {
+		font-size: 3.2vw;
+		line-height: 3.8vw;
+		font-weight: 900;
+		padding-bottom: 5vh;
+		padding-right: 4vw;
+	}
+
 	.bb-typography__header {
 		font-size: 2.3vw;
 	}
@@ -74,6 +91,14 @@ body {
 }
 
 @media only screen and (min-width: 1200px) and (min-height: 300px) {
+	.page-header {
+		font-size: 2.5vw;
+		line-height: 3vw;
+		font-weight: 900;
+		padding-bottom: 4vh;
+		padding-right: 2vw;
+	}
+
 	.bb-typography__header {
 		font-size: 1.5vw;
 	}
