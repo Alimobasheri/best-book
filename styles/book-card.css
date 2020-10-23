@@ -163,6 +163,17 @@
 		min-height: 41vw;
 		min-height: 41vw;
 	}
+
+	.book-card__wrapper.column.full-width {
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.book-card__wrapper.column.full-width > .book-card__text {
+		align-items: center;
+	}
 }
 
 @media only screen and (min-width: 768px) {
@@ -179,6 +190,17 @@
 		max-width: 23vw;
 		min-height: 30vw;
 		min-height: 30vw;
+	}
+
+	.book-card__wrapper.column.full-width {
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.book-card__wrapper.column.full-width > .book-card__text {
+		align-items: center;
 	}
 }
 
