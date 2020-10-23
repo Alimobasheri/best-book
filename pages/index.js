@@ -52,6 +52,11 @@ export default function Home() {
 					maxWidth={'80vw'} />
 				</div>
 				{homeListsEls}
+				<style jsx>{`
+					.page-header {
+						color: ${mainContext.theme.primaryFontColor}
+					}
+				`}</style>
 			</React.Fragment>
 	
 	const resultsList = searchText == '' ? 
@@ -70,11 +75,6 @@ export default function Home() {
 				homePage : 
 				resultsList
 			}
-			<style jsx>{`
-				.page-header {
-					color: ${mainContext.theme.primaryFontColor}
-				}
-			`}</style>
 		</div>
 	)
 }
