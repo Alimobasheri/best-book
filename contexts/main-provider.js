@@ -6,6 +6,8 @@ import {useEffect, useState} from 'react'
 const MainProvider = (props) => {
 	const [signInField, setSignInField] = useState({email: '', password: ''})
 
+	const currentUser = auth.currentUser()
+
 	const signUp = (email, password) => {
 		return auth.signup(email, password)
 	}
@@ -77,6 +79,7 @@ const MainProvider = (props) => {
 	const contextValue = {
 		signInField,
 		setSignInField,
+		currentUser,
 		signUp,
 		signIn,
 		allIsLoaded: () => {return !data.isFetching},
