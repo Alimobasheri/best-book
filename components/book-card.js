@@ -23,6 +23,8 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 	const context = useContext(MainContext)
 	
 	const [openTab, setOpenTab] = useState(0)
+
+	const bookCardWrapperRef = useRef(null)
 	
 	const bookInformation =
 		<React.Fragment>
@@ -45,10 +47,13 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 	
 	const goToPrevPath = (e) => {
 		e.preventDefault()
-		if (closeCallback !== undefined) {
-			closeCallback().then(res => {
-				router.push({pathname: router.query.prevPath, query:{prevPath: router.pathname, redirect: 'BACKWARD'}})
-			})
+		if (information) {
+			//closeCallback().then(res => {
+			bookCardWrapperRef.current.classList.add('exit-bounce')
+			setTimeout(() => 
+				router.push({pathname: router.query.prevPath, query:{prevPath: router.pathname, redirect: 'BACKWARD'}}),
+			200)
+			//})
 		} else {
 			router.push({pathname: router.query.prevPath, query:{prevPath: router.pathname, redirect: 'BACKWARD'}})
 		}
@@ -57,9 +62,8 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 	const transitionToBook = (e) => {
 		e.preventDefault()
 		if(!information) {
-			context.endCompMockUp.callback().then(res => {
-				redirectToBookPage()
-			})
+			bookCardWrapperRef.current.classList.add('exit-bounce')
+			setTimeout(redirectToBookPage, 100)
 		}
 	}
 	
@@ -76,7 +80,9 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 					onClickFn={goToPrevPath} />
 				</div>
 			}
-		<div className={`book-card__wrapper ${view} ${information && 'full-width'}`}>
+		<div 
+		className={`book-card__wrapper ${view} ${information && 'full-width'}`}
+		ref={bookCardWrapperRef}>
 			<div 
 			className={`book-card__cover ${!information ? 'fade' : ''}`}  
 			onClick={transitionToBook}>
@@ -89,7 +95,9 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 				<div>
 					<Link 
 					href={{pathname: `/book/${id}`, query: {prevPath: router.pathname, redirect: 'FORWARD'}}} style={{textDecoration:'none', color: context.theme.primaryFontColor}}><div className="book-card__name bb-typography__title2" style={{color: context.theme.primaryFontColor}} onClick={transitionToBook}>{name}</div></Link>
-					<div className="book-card__writer bb-typography__title2" style={{color: context.theme.secondaryFontColor}}>{writer}{translator && translator != 'false' && <span className="book-card__translator bb-typography__title2" style={{color: context.theme.secondaryFontColor}}> \ {translator}</span>}</div>
+					{information &&
+						<div className="book-card__writer bb-typography__title2" style={{color: context.theme.secondaryFontColor}}>{writer}{translator && translator != 'false' && <span className="book-card__translator bb-typography__title2" style={{color: context.theme.secondaryFontColor}}> \ {translator}</span>}</div>
+					}
 					<RatingStars rating={parseFloat(rating)} rates={parseInt(rates)} />
 				</div>
 				<div>
