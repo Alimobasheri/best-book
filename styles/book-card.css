@@ -7,7 +7,32 @@
 	min-width: 100%;
 	max-width: 100%;
 	height: auto;
+	transition: transform 0.2s ease-in-out;
 }
+
+.book-card__wrapper:hover {
+	transform: scale(0.95);
+}
+
+.book-card__wrapper.full-width {
+	transition: transform 0.2s ease-out;
+}
+
+.book-card__wrapper.full-width:hover {
+	transform: scale(1);
+}
+
+.book-card__wrapper.full-width.exit-bounce {
+	transform: scale(0.7);
+}
+
+.book-card__wrapper.exit-bounce {
+	transform: scale(1.4);
+}
+
+/*.book-card__wrapper.exit:hover {
+	transform: scale(0.9);
+}*/
 
 .book-card__cover {
 	height: 30vw;
@@ -35,6 +60,10 @@
 .book-card__cover.fade{
 	opacity: 0;
 	animation: fast-fade-in 0.5s 0.1s forwards;
+}
+.book-card__cover.fade > span:hover {
+	box-shadow: 1px 1px 20px rgba(1, 1, 1, 0.3);
+	cursor: pointer;
 }
 
 .book-card__wrapper.column {
@@ -70,7 +99,7 @@
 
 .book-card__text {
 	width: 100%;
-	min-height: 30vw;
+	min-height: 20vw;
 	flex-basis: 2;
 	flex-grow: 5;
 	display: flex;
@@ -121,6 +150,10 @@
 @media only screen and (max-width: 767px) {
 	.book-card__cover {
 		min-height: 39vw;
+	}
+
+	.book-card__cover > span {
+		border-radius: 3vw;
 	}
 
 	.book-card__wrapper.column > .book-card__cover {
