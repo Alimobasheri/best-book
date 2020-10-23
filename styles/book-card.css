@@ -202,6 +202,10 @@
 	.book-card__wrapper.column.full-width > .book-card__text {
 		align-items: center;
 	}
+
+	.book-card__text {
+		min-height: 12vw;
+	}
 }
 
 @media only screen and (min-width: 1200px) and (min-height: 300px) {
