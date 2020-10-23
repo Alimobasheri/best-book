@@ -65,6 +65,7 @@ export default function Nav(){
 				className='nav__searchBar'>
 					<SearchBar/>
 				</div>
+				{mainContext.currentUser}
 				<div>
 					<Link 
 					href="/" 
@@ -75,7 +76,7 @@ export default function Nav(){
 							color: mainContext.theme.primaryFontColor, 
 							borderBottomColor: mainContext.theme.primaryFontColor
 						}}>
-							خانه
+							کتابگردی
 						</span>
 					</Link>
 				</div>
