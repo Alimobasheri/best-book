@@ -1,6 +1,8 @@
 import {useContext, useRef} from 'react'
 import {useRouter} from 'next/router'
 
+import Head from 'next/head'
+
 import MainContext from '../../contexts/main-context'
 
 import List from '../../components/list'
@@ -25,6 +27,9 @@ export default function BookPreview () {
 		<List view={'column'} title={''} books={[...books].filter(book => book.id == book_id)} information closeCallback={slideOut} />
 	return (
 		<React.Fragment>
+			<Head>
+				<title>بست بوک | {books.filter(book => book.id == book_id)[0].name}</title>
+			</Head>
 			<div ref={_wrapperRef} dir="rtl" className="book-preview__wrapper" >
 				{bookPreview}
 			</div>
