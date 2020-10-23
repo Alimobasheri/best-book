@@ -4,6 +4,10 @@
 	position: relative;
 }
 
+.theme-switch:hover {
+	cursor: pointer;
+}
+
 .theme-switch__btn {
 	width: 100%;
 	height: 100%;
