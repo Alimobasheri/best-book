@@ -14,6 +14,8 @@ export default function Nav(){
 	
 	const mainContext = useContext(MainContext)
 	const router = useRouter()
+
+	const navSearchBarRef = useRef(null)
 	//const location = useLocation()
 	
 	let _navWrapper = useRef(null)
@@ -76,7 +78,7 @@ export default function Nav(){
 					href="/" 
 					style={{textDecoration: 'none'}}>
 						<span 
-						className={`link-item ${router.pathname === '/' && 'active'} bb-typography__title`} 
+						className={`link-item ${router.pathname === '/' && 'active'} bb-typography__nav-link`} 
 						style={{
 							color: mainContext.theme.primaryFontColor, 
 							borderBottomColor: mainContext.theme.primaryFontColor
@@ -90,7 +92,7 @@ export default function Nav(){
 					href="/about-us" 
 					style={{textDecoration: 'none'}}>
 						<span 
-						className={`link-item ${router.pathname === '/about-us' && 'active'} bb-typography__title`} 
+						className={`link-item ${router.pathname === '/about-us' && 'active'} bb-typography__nav-link`} 
 						style={{
 							color: mainContext.theme.primaryFontColor, 
 							borderBottomColor: mainContext.theme.primaryFontColor
@@ -111,7 +113,7 @@ export default function Nav(){
 				<ThemeSwitch />
 			</div>
 			<style jsx>{`
-				@media only screen and (min-width: 998px) {
+				@media only screen and (min-width: 1200px) {
 					.link-item.active {
 						background-color: ${mainContext.theme.secondaryBackgroundColor};
 						border-bottom: 0px;

@@ -75,6 +75,7 @@
 	opacity: 0;
 	max-width: 0px;
 	max-height: 0px;
+	transform: translateX(-10000);
 }
 .link-item {
 	color: #2E414E;
@@ -141,6 +142,10 @@
 		display: block;
 	}
 	.nav-items__wrapper > div:nth-child(2) { margin-left: 20%;}
+
+	.link-item.active {
+		border-bottom: 1.5px solid;
+	}
 }
 
 @media only screen and (min-width: 1200px) and (min-height: 300px) {
