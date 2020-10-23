@@ -7,6 +7,7 @@
 	padding: 0.5vw 3vw;
 	border-radius: 1vw;
 	transition: padding 0.2s ease;
+	box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.1);
 }
 
 .btn > .btn__button:hover {
@@ -16,6 +17,7 @@
 
 .btn--outline > .btn__button {
 	border: 0.3vw solid;
+	box-shadow: none;
 }
 
 /*.btn--nav > .btn__button {
