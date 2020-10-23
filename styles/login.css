@@ -35,6 +35,11 @@
 .login__label {
 	/*font-size: 3vw;*/
 	padding-bottom: 2vh;
+	width: 100%;
+}
+
+.login__label > input {
+	margin-top: 2vh;
 }
 
 .login__label > span {
