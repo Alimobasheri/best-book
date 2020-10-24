@@ -1,8 +1,13 @@
+@font-face {
+	font-family: ShabnamRegular;
+	src: url("https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam.ttf");
+}
+
 *, *:before, *:after {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-family: ShabnamRegular, 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 html, body, #root {
@@ -67,7 +72,6 @@ body {
 .bb-typography__nav-link {
 	font-size: 6vw;
 	font-weight: 900px;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 @media only screen and (min-width: 768px) {
