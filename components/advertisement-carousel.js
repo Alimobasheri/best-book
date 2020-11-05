@@ -38,13 +38,13 @@ export default function AdvertisementCarouselItems({items}) {
                         justify-content: space-between;
                         align-items: center;
                         padding: 3vh 2vw;
-                        background-color: ${mainContext.theme.secondaryBackgroundColor};
+                        background-color: ${item.backgroundColor};
                         border-radius: 20px;
                         border: 1px solid rgba(0, 0, 0, 0.1);
                     }
 
                     .carousel-image__text > h1 {
-                        color: ${mainContext.theme.primaryFontColor};
+                        color: ${mainContext.theme.primaryBackgroundColor};
                     }
 
                     .carousel-image__text > h2 {
