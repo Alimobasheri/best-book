@@ -3,6 +3,9 @@ import {useContext, useState, useRef} from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTag} from '@fortawesome/free-solid-svg-icons'
+
 import MainContext from '../contexts/main-context'
 
 import Btn from './btn'
@@ -48,12 +51,10 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 	const goToPrevPath = (e) => {
 		e.preventDefault()
 		if (information) {
-			//closeCallback().then(res => {
 			bookCardWrapperRef.current.classList.add('exit-bounce')
 			setTimeout(() => 
 				router.push({pathname: router.query.prevPath, query:{prevPath: router.pathname, redirect: 'BACKWARD'}}),
 			200)
-			//})
 		} else {
 			router.push({pathname: router.query.prevPath, query:{prevPath: router.pathname, redirect: 'BACKWARD'}})
 		}
@@ -94,14 +95,43 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 			className="book-card__text">
 				<div>
 					<Link 
-					href={{pathname: `/book/${id}`, query: {prevPath: router.pathname, redirect: 'FORWARD'}}} style={{textDecoration:'none', color: context.theme.primaryFontColor}}><div className="book-card__name bb-typography__title2" style={{color: context.theme.primaryFontColor}} onClick={transitionToBook}>{name}</div></Link>
+					href={{pathname: `/book/${id}`, query: {prevPath: router.pathname, redirect: 'FORWARD'}}} 
+					style={{textDecoration:'none', color: context.theme.primaryFontColor}}>
+						<div 
+						className={`book-card__name bb-typography__${!information ? 'title2' : 'title'}`} 
+						style={{color: context.theme.primaryFontColor}} 
+						onClick={transitionToBook}>
+							{
+								`${information ? 'عنوان کتاب : ' : ''}${name}`
+							}
+						</div>
+					</Link>
 					{information &&
-						<div className="book-card__writer bb-typography__title2" style={{color: context.theme.secondaryFontColor}}>{writer}{translator && translator != 'false' && <span className="book-card__translator bb-typography__title2" style={{color: context.theme.secondaryFontColor}}> \ {translator}</span>}</div>
+						<div 
+						className={`book-card__writer bb-typography__${!information ? 'title2' : 'title'}`} 
+						style={{color: context.theme.secondaryFontColor}}>
+							{`${information ? 'نام نویسنده : ' : ''}${writer}`}
+							{translator && translator != 'false' && 
+								<div 
+								className={`book-card__translator${!information && '--inline'} bb-typography__${!information ? 'title2' : 'title'}`} 
+								style={{color: context.theme.secondaryFontColor}}> 
+								{!information ? ` \\ ${translator}` : `نام مترجم : ${translator}`}
+								</div>
+							}
+						</div>
 					}
 					<RatingStars rating={parseFloat(rating)} rates={parseInt(rates)} />
 				</div>
 				<div>
-					<Btn text={`${toFarsiDigits(price)} تومان`} outline fullWidth={view === 'row'} />
+					<Btn text={
+						<React.Fragment>
+							<span 
+							className='price__tag-icon'>
+								<FontAwesomeIcon icon={faTag} />
+							</span> | 
+							<span className='price__text'>{toFarsiDigits(price)} تومان</span>
+						</React.Fragment>
+					} outline fullWidth={view === 'row'} />
 				</div>
 			</div>
 			{information && 
