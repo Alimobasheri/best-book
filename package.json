@@ -14,9 +14,11 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "gotrue-js": "^0.9.27",
+    "mongoose": "^5.10.13",
     "next": "9.5.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-swipeable": "^5.5.1"
+    "react-swipeable": "^5.5.1",
+    "sass": "^1.29.0"
   }
 }
