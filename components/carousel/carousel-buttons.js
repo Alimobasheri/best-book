@@ -76,15 +76,15 @@ export default function CarouselButtons({carouselState, setCarouselState, count,
                         }
 
                         .carousel-button__item__circle {
-                            width: 15px;
-                            min-width: 15px;
-                            height: 15px;
-                            min-height: 15px;
+                            width: 10px;
+                            min-width: 10px;
+                            height: 10px;
+                            min-height: 10px;
                         }
 
                         .carousel-button__item__circle:hover {
-                            width: 18px;
-                            height: 18px;
+                            width: 12px;
+                            height: 12px;
                         }
                     }
                 `}</style>
