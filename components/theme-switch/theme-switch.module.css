@@ -1,0 +1,72 @@
+.wrapper {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+.wrapper .btn {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: transparent;
+}
+.wrapper .btn:hover {
+  cursor: pointer;
+}
+.wrapper .bigCircle {
+  content: "";
+  width: 22.66px;
+  height: 22.66px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.wrapper .smallCircle {
+  width: 17.86px;
+  height: 17.86px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 66.66%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+.wrapper.toggled .smallCircle {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.wrapper:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 20px rgba(30, 120, 220, 0.3);
+}
+
+@media only screen and (min-width: 768px) {
+  .theme-switch {
+    width: 80px;
+    max-width: 80px;
+    height: 80px;
+    max-height: 80px;
+  }
+  .theme-switch .btn {
+    border-radius: 16px;
+  }
+  .theme-switch .bigCircle {
+    width: 45.72px;
+    max-width: 45.72px;
+    height: 45.72px;
+    max-height: 45.72px;
+    top: 50%;
+  }
+  .theme-switch .smallCircle {
+    width: 35.72px;
+    max-width: 35.72px;
+    height: 35.72px;
+    max-height: 35.72px;
+    top: 50%;
+  }
+}
+
+/*# sourceMappingURL=theme-switch.module.css.map */
