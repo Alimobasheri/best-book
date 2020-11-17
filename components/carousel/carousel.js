@@ -4,9 +4,9 @@ import {Swipeable} from 'react-swipeable'
 import CarouselSlider from './carousel-slider'
 import CarouselButtons from './carousel-buttons'
 
-export default function Carousel({items, maxWidth}) {
+export default function Carousel({items, maxWidth, minHeight=null}) {
     let itemsCount = items.length
-
+    
     const [carouselState, setCarouselState] = useState({
         goToIndex: null, 
         changingSlide: false, 
@@ -20,19 +20,12 @@ export default function Carousel({items, maxWidth}) {
     }
     
     return (
-        <React.Fragment>
+        <div
+        className='carousel'>
             <Swipeable 
             onSwipedRight={(eventData) => {changeCarouselSlide(currentIndex-1)}}
             onSwipedLeft={(eventData) => {changeCarouselSlide(currentIndex+1)}}>
                 <div className='carousel__wrapper' dir='ltr'>
-                    <style jsx>{`
-                        .carousel__wrapper {
-                            min-width: ${maxWidth || '100%'};
-                            max-width: ${maxWidth || '100%'};
-                            overflow: hidden;
-                            border-radius: 20px;
-                        }
-                    `}</style>
                     <CarouselSlider 
                     items={items} 
                     itemsCount={itemsCount} 
@@ -47,6 +40,24 @@ export default function Carousel({items, maxWidth}) {
                     currentIndex={currentIndex}/>
                 </div>
             </Swipeable>
-        </React.Fragment>
+            <style jsx>{`
+                .carousel__wrapper {
+                    min-width: ${maxWidth || '100%'};
+                    max-width: ${maxWidth || '100%'};
+                    overflow: hidden;
+                    ${minHeight !== null &&
+                        'min-height: '+minHeight+';'
+                        }
+                }
+                .carousel {
+                    min-width: ${maxWidth || '100%'};
+                    max-width: ${maxWidth || '100%'};
+                    overflow: hidden;
+                    ${minHeight !== null &&
+                        'min-height: '+minHeight+';'
+                    }
+                }
+            `}</style>
+        </div>
     )
 }
