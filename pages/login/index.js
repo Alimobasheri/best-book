@@ -8,6 +8,9 @@ import MainContext from '../../contexts/main-context'
 import Btn from '../../components/btn'
 import { route } from 'next/dist/next-server/server/router'
 import { Router } from 'next/router'
+import TextInput from '../../components/text-input'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 
 export default function Login() {
 	const mainContext = useContext(MainContext)
@@ -25,7 +28,8 @@ export default function Login() {
 		//setAuthentication({authenticated: authentication.authenticated, loading: true})
 		signIn()
 			.then(response => {
-				router.push({pathname: '/'})
+				console.log(response)
+				router.push('/')
 			})
 			.catch(error => {
 				console.log(`Login Error: ${error}`)
@@ -54,24 +58,90 @@ export default function Login() {
 	
 	return (
 		<div dir="rtl" className="login__wrapper" style={loginWrapperStyle}>
-			<form className="login__form__wrapper" style={loginFormWrapperStyle} onSubmit={handleSubmit}>
+			<form className="login__form__wrapper login" style={loginFormWrapperStyle} onSubmit={handleSubmit}>
+				<div
+				className="login__form__fields__Wrapper">
 				<div className="login__fields__top-wrapper">
 					<h1 className="login__title bb-typography__header" style={titleFontStyle}>ورود به حساب كاربرى</h1>
-					<label htmlFor="email" className="login__label bb-typography__title" style={titleFontStyle}>
-					 نام كاربرى يا نشانى رايانامه
-						<input type="text" id="email" name="email" className="login__text-input bb-typography__body" placeholder="مثال: mojtaba@example.com" style={{...titleFontStyle, ...textInputStyle}} onChange={handleChange} />
-					</label>
-					<label htmlFor="password" className="login__label bb-typography__title" style={titleFontStyle}>
-						كلمه ى عبور
-						<input type="password" id="password" className="login__text-input bb-typography__body" name="password" style={{...titleFontStyle, ...textInputStyle}} onChange={handleChange} />
-						<span className="forgot-password bb-typography__body" style={explanationFontStyle}>كلمه ى عبور خود را فراموش كرده ايد؟</span>
-					</label>
+					<TextInput
+					title={(
+						<React.Fragment>
+							<FontAwesomeIcon  icon={faEnvelope} /> نشانی رایانامه
+						</React.Fragment>
+					)}
+					placeholder='moj@moheb.com'
+					type='email'
+					name='email'
+					required
+					onChange={handleChange}
+					/>
+					<TextInput
+					title={(
+						<React.Fragment>
+							<FontAwesomeIcon icon={faLock} /> رمز عبور
+						</React.Fragment>
+					)}
+					placeholder='******'
+					type='password'
+					name='password'
+					required
+					onChange={handleChange}
+					/>
 				</div>
 				<div className="submit__wrapper">
-					<span style={explanationFontStyle}>همچنان حساب باز نكرده ايد؟<Link href={'/sign-up'} style={{textDecoration: 'none'}}><span className="no-account__link" style={{color: mainContext.theme.primaryFontColor}}>ثبت نام كنيد</span></Link></span>
+					<span style={explanationFontStyle}>همچنان حساب باز نكرده ايد؟
+						<Link href={'/signup'} style={{textDecoration: 'none'}}>
+							<span 
+							className="no-account__link" 
+							style={{
+								color: mainContext.theme.primaryFontColor,
+								cursor: 'pointer'
+							}}>
+								 ثبت نام كنيد
+							</span>
+						</Link>
+					</span>
 					<Btn text="ورود به حساب" fullWidth onClick={handleSubmit} />
 				</div>
+				</div>
+				<div className="book-shelf-cover">
+					<div
+					className="book-shelf-cover__image">
+
+					</div>
+				</div>
 			</form>
+			<style jsx>{`
+				.login__form__wrapper.login {
+					display: flex;
+					flex-direction: row-reverse;
+					padding: 0;
+				}
+				.login__form__fields__Wrapper {
+					min-height: 100%;
+					display: flex;
+					flex-direction: column;
+					flex-wrap: nowrap;
+					justify-content: space-evenly;
+					align-items: center;
+					min-width:48%;
+					padding: 1vh 2vw;
+				}
+				.book-shelf-cover {
+					width: 48%;
+					min-height: 100%;
+					border-top-right-radius: 25px;
+					border-bottom-right-radius: 25px;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: stretch;
+					background-image: url('/assets/wallpapers/girl-book-steps.jpg');
+					background-repeat: no-repeat;
+					background-size: cover;
+					background-position: center;
+				}
+			`}</style>
 		</div>
 	)
 }
