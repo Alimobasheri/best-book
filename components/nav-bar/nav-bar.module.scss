@@ -1,0 +1,64 @@
+@import '../../styles/mixins';
+
+// Navbar parts widths & heights
+$wrapperWidth: 100%;
+$wrapperHeight: 60%;
+$buttonsWrapperWidth: 100%;
+$buttonsWrapperHeight: 40%;
+
+.navBar {
+    display: none;
+    position: absolute;
+    @include fixedSize(width, 100%);
+    @include fixedSize(height, 100vh);
+    z-index: 5;
+    top: 0;
+    right: 0;
+    & div{
+        transition: opacity 0.3s ease;
+    }
+    &.toggled {
+        display: block;
+        & .wrapper {
+            opacity: 1;
+        }
+        & .buttonsWrapper {
+            opacity: 1;
+        }
+    }
+    & .wrapper {
+        @include fixedSize(width, $wrapperWidth);
+        @include fixedSize(height, $wrapperHeight);
+        padding: 20% 10%;
+        position: relative;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        & .linkWrapper {
+            width: 100%;
+            padding: 0;
+            margin: 6px 0;
+        }
+    }
+    & .buttonsWrapper {
+        @include fixedSize(width, $buttonsWrapperWidth);
+        @include fixedSize(height, $buttonsWrapperHeight);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        transition-delay: 1s;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .navBar {
+        display: none;
+        width: 0px;
+        height: 0px;
+        transform: translateX(-100000px);
+    }
+}
