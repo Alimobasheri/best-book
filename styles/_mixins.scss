@@ -1,0 +1,8 @@
+@mixin fixedSize($property, $value) {
+    $min-property: 'min-'+$property;
+    $max-property: 'max-' + $property;
+    
+    #{$property}: $value;
+    #{$min-property}: $value;
+    #{$max-property}: $value;
+}
