@@ -1,12 +1,12 @@
 import {useContext} from 'react'
 
-import { faBell, faCheckCircle, faExclamationTriangle, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faCheckCircle, faExclamationTriangle, faSync, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import MainContext from "../contexts/main-context"
+import { ThemeContext } from "../contexts/theme-context"
 
 export default function MessageBox({message, type}) {
-const mainContext = useContext(MainContext)
+    const {theme} = useContext(ThemeContext)
 
     const setBoxIcon = () => {
         switch(type) {
@@ -18,6 +18,8 @@ const mainContext = useContext(MainContext)
                 return <FontAwesomeIcon icon={faTimes} />
             case 'success':
                 return <FontAwesomeIcon icon={faCheckCircle} />
+            case 'loading':
+                return <FontAwesomeIcon icon={faSync} spin/>
             default:
                 console.warn('Messag Box Component ERROR: No correct type was given.')
                 return <FontAwesomeIcon icon={faBell} />
@@ -26,16 +28,22 @@ const mainContext = useContext(MainContext)
     return (
         <div
         className={`message-box__wrapper ${type} bb-typography__title`}>
-            {setBoxIcon()}
-            <p
+            <span
+            className="message-box__icon">
+                {setBoxIcon()}
+            </span>
+            <div
             className='message-box__text'>
+                <p>
                 {message}
-            </p>
+                </p>
+            </div>
             <style jsx>{`
                 .message-box__wrapper {
                     padding: 2vh 2vw;
                     margin: 1vh 0;
                     border: 1px solid;
+                    border-radius: 15px;
                     width: 100%;
                     display: flex;
                     flex-flow: row nowrap;
@@ -44,14 +52,18 @@ const mainContext = useContext(MainContext)
                 }
 
                 .message-box__text {
-                    max-width: 80%;
+                    width: 90%;
+                    max-width: 90%;
                     text-align: right;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
                 }
 
                 .message-box__wrapper.primary {
-                    border-color: ${mainContext.primaryFontColor};
+                    border-color: ${theme.primaryFontColor};
                     backgound-color: #F7CBCA;
-                    color: ${mainContext.primaryFontColor};
+                    color: ${theme.primaryFontColor};
                     font-weight: bold;
                 }
 
@@ -73,6 +85,12 @@ const mainContext = useContext(MainContext)
                     border-color: #00CC00;
                     backgound-color: #F7CBCA;
                     color: #00CC00;
+                    font-weight: bold;
+                }
+                .message-box__wrapper.loading {
+                    border-color: ${theme.primaryBackgroundColor};
+                    background-color: ${theme.primaryFontColor};
+                    color: ${theme.primaryBackgroundColor};
                     font-weight: bold;
                 }
             `}</style>
