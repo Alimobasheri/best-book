@@ -6,6 +6,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
 
 import MainContext from '../../contexts/main-context'
+import { AuthContext } from '../../contexts/auth-context'
+
 import Btn from '../../components/btn'
 import TextInput from '../../components/text-input'
 import MessageBox from '../../components/message-box'
@@ -13,6 +15,7 @@ import SignupCarousel from '../../components/signup-carousel'
 
 export default function SignUp () {
 	const mainContext = useContext(MainContext)
+	const { signUp } = useContext(AuthContext)
 
 	const router = useRouter()
 
@@ -71,7 +74,6 @@ export default function SignUp () {
 		if (e !== undefined) e.preventDefault()
 		setLoading(true)
 		if(validateForm()) {
-			const {signUp} = mainContext
 			signUp(signUpEmailRef.current.value, signUpPasswordRef.current.value)
 				.then(response => {
 					setLoading(false)
