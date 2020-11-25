@@ -1,4 +1,8 @@
 import {useState, useEffect} from 'react'
+import {useRouter} from 'next/router'
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faSearch} from '@fortawesome/free-solid-svg-icons'
 
 import MainContext from '../contexts/main-context'
 import CloseBtn from '../components/close-btn'
@@ -6,15 +10,19 @@ import CloseBtn from '../components/close-btn'
 export default function SearchBar (props) {
 	var _searchInput
 	let {responsive} = props
+
+	const router = useRouter()
+
 	return(
 		<MainContext.Consumer>
 		{context => {
 			const {theme, setSearchMode, searchText, setSearchText} = context
 			const inputWrapperStyle = {
-				backgroundColor: theme.secondaryBackgroundColor
+				backgroundColor: theme.primaryBackgroundColor,
+				color: theme.secondaryFontColor
 			}
 			const inputStyle = {
-				backgroundColor: theme.secondaryBackgroundColor,
+				backgroundColor: theme.primaryBackgroundColor,
 				color: theme.secondaryFontColor
 			}
 			
@@ -43,12 +51,25 @@ export default function SearchBar (props) {
 			const clearText = (e) => {
 				e.preventDefault()
 				setSearchText('')
+				router.back()
 			}
 			return(
 				<div className={`search-bar__wrapper ${responsive ? 'responsive':''}`}>
 					<div className="search-bar__input-wrapper" style={inputWrapperStyle}>
-						<div className="search-bar__icon">{IconSVGTag}</div>
-						<input className="search-bar__input"  ref={input => _searchInput = input} onFocus={setFocus} onBlur={setBlur} style={inputStyle} onChange={setText} type="text" value={searchText} placeholder="اينجا جستجو كنيد..."/>
+						<div 
+						className="search-bar__icon">
+							<FontAwesomeIcon icon={faSearch} />
+						</div>
+						<input 
+						className="search-bar__input"  
+						ref={input => _searchInput = input} 
+						onFocus={setFocus} 
+						onBlur={setBlur} 
+						style={inputStyle} 
+						onChange={setText} 
+						type="text" 
+						value={searchText} 
+						placeholder="اينجا جستجو كنيد..."/>
 						<CloseBtn onClickFn={clearText} toggled={searchText != '' ? true : false} />
 					</div>
 				</div>
