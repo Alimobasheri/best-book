@@ -1,26 +1,38 @@
 import {useState, useEffect, useContext, useRef} from 'react'
+
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-//import {useLocation, Link}  ReactRouterDOM
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faBookReader, faAddressCard, faSignInAlt, faUserPlus} from '@fortawesome/free-solid-svg-icons'
 
 import MainContext from '../contexts/main-context'
+import { NavContext } from '../contexts/nav-context'
+import { AuthContext } from '../contexts/auth-context'
+
 import HamburgerButton from '../components/hamburger-button'
 import Btn from '../components/btn'
-import ThemeSwitch from '../components/theme-switch'
+import ThemeSwitch from './theme-switch/index'
 import SearchBar from './search-bar'
 
 export default function Nav(){
 	const [toggled, setToggled] = useState(false)
 	
 	const mainContext = useContext(MainContext)
+	const {mobileNavbarOpen, toggleMobileNavbarOpen} = useContext(NavContext)
+	const authContext = useContext(AuthContext)
+
 	const router = useRouter()
 
+	const toggleMobileNavbar = () => {
+		console.log(typeof toggleMobileNavbarOpen)
+		toggleMobileNavbarOpen()
+	}
+
 	const navSearchBarRef = useRef(null)
-	//const location = useLocation()
 	
 	let _navWrapper = useRef(null)
 	const changeNavHeight = () => {
-		console.log(`navWrapper: ${_navWrapper.current}`)
 		mainContext
 			.setNavHeight(
 				window
@@ -41,8 +53,7 @@ export default function Nav(){
 	return(
 		<div 
 		dir="rtl" 
-		className={`nav ${toggled ? 'toggled' : ''}`} 
-		style={{backgroundColor: mainContext.theme.primaryBackgroundColor}} 
+		className={`nav ${toggled ? 'toggled' : ''}`}  
 		ref={_navWrapper}>
 			<div 
 			className="nav__wrapper">
@@ -62,8 +73,8 @@ export default function Nav(){
 				className="nav-hamburger">
 					<HamburgerButton 
 					lineColor={mainContext.theme.primaryFontColor} 
-					toggled={toggled} 
-					toggle={setToggled}/>
+					toggled={mobileNavbarOpen} 
+					toggle={toggleMobileNavbar}/>
 				</div>
 			</div>
 			<div 
@@ -72,18 +83,17 @@ export default function Nav(){
 				className='nav__searchBar'>
 					<SearchBar/>
 				</div>
-				{mainContext.currentUser}
 				<div>
 					<Link 
 					href="/" 
-					style={{textDecoration: 'none'}}>
+					style={{textDecoration: 'none', minWidth:'100%'}}>
 						<span 
 						className={`link-item ${router.pathname === '/' && 'active'} bb-typography__nav-link`} 
 						style={{
 							color: mainContext.theme.primaryFontColor, 
 							borderBottomColor: mainContext.theme.primaryFontColor
 						}}>
-							کتابگردی
+							کتابگردی <FontAwesomeIcon icon={faBookReader} />
 						</span>
 					</Link>
 				</div>
@@ -97,25 +107,58 @@ export default function Nav(){
 							color: mainContext.theme.primaryFontColor, 
 							borderBottomColor: mainContext.theme.primaryFontColor
 						}}>
-							درباره
+							درباره <FontAwesomeIcon icon={faAddressCard} />
 						</span>
 					</Link>
 				</div>
-				{/*{!mainContext.authentication().authenticated ? */}
-					{/*(*/}<React.Fragment>
-						<Link href="/login" style={{textDecoration: 'none'}}><Btn text='ورود' navButton outline/></Link>
-						<Link href="/signup" style={{textDecoration: 'none'}}><Btn text='عضويت' navButton /></Link>
-					</React.Fragment>{/*) :*/}
-					{/*<React.Fragment>
-						<Link href="/logout" style={{textDecoration: 'none'}}><Btn text='خروج' navButton outline/></Link>
-					</React.Fragment>
-				{/*}*/}
-				<ThemeSwitch />
+				{authContext.user === null ?
+					(<React.Fragment>
+						<Link href="/login" passHref>
+							<Btn 
+							text={
+								<React.Fragment>
+									ورود <FontAwesomeIcon icon={faSignInAlt} />
+								</React.Fragment>
+							}
+							navButton
+							fullWidth 
+							outline/>
+						</Link>
+						<Link href="/signup" passHref>
+							<Btn 
+							text={
+								<React.Fragment>
+									عضویت <FontAwesomeIcon icon={faUserPlus} />
+								</React.Fragment>
+							} 
+							navButton
+							fullWidth />
+						</Link>
+					</React.Fragment>) :
+					(<React.Fragment>
+						<Link href="/logout" passHref>
+							<Btn text='خروج' navButton outline fullWidth/>
+						</Link>
+					</React.Fragment>)
+			}
+				<div
+				className="theme-switch__Wrapper">
+					<ThemeSwitch />
+				</div>
 			</div>
 			<style jsx>{`
+				.nav {
+					background-color: ${mainContext.theme.primaryBackgroundColor}
+				}
+
 				@media only screen and (min-width: 1200px) {
-					.link-item.active {
+					.nav {
 						background-color: ${mainContext.theme.secondaryBackgroundColor};
+						box-shadow: -5px 0px 10px rgba(30, 30, 30, 0.1);
+						z-index: 6;
+					}
+					.link-item.active {
+						background-color: ${mainContext.theme.primaryBackgroundColor};
 						border-bottom: 0px;
 						transition: background-color 0.3s ease;
 						box-shadow: 0px 0px 1px rgba(8, 9, 10, 0.2),
