@@ -1,0 +1,44 @@
+.link {
+  width: 100%;
+  padding: 15px 0;
+  position: relative;
+  opacity: 0.6;
+  transition: opacity 0.3s ease-in;
+  text-decoration: none;
+  font-size: 20px;
+}
+.link::before {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  height: 4px;
+  opacity: 0;
+  transform: translateX(-30vh);
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.link:hover, .link.active {
+  opacity: 1;
+}
+.link:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+.link:focus {
+  outline: none;
+}
+.link:focus::before {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+.link .content {
+  text-align: right;
+  padding-right: 4px;
+}
+.link .icon {
+  padding: 0 4px;
+}
+
+/*# sourceMappingURL=nav-bar-link.module.css.map */

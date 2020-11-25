@@ -1,0 +1,55 @@
+// Transitions
+$slide: all 0.3s cubic-bezier(.55, 0, .1, 1);
+$linkFade: opacity 0.3s ease-in;
+
+// Link Opacity
+$inactiveLinkOpacity: 0.6;
+$activeLinkOpacity: 1;
+$hoveredLinkOpacity: 0.9;
+
+// Link font size
+$smLinkFontSize: 20px;
+
+.link {
+    width: 100%;
+    padding: 15px 0;
+    position: relative;
+    opacity: $inactiveLinkOpacity;
+    transition: $linkFade;
+    text-decoration: none;
+    font-size: $smLinkFontSize;
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 18px;
+        height: 4px;
+        opacity: 0;
+        transform: translateX(-30vh);
+        transition: $slide;
+    }
+    &:hover,
+    &.active {
+        opacity: $activeLinkOpacity;
+    }
+    &:hover {
+        opacity: $hoveredLinkOpacity;
+        text-decoration: none;
+    }
+    &:focus {
+        outline: none;
+        &::before {
+            opacity: 1;
+            transform: translateX(-4px);
+        }
+    }
+    & .content {
+        text-align: right;
+        padding-right: 4px;
+    }
+    & .icon {
+        padding: 0 4px;
+    }
+}
