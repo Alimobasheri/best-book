@@ -1,39 +1,98 @@
-import {useContext} from 'react'
+import { useState, useContext, useRef } from 'react'
+
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-//const {Link} = ReactRouterDOM
 
-import MainContext from '../../contexts/main-context'
-
-import Btn from '../../components/btn'
-import { route } from 'next/dist/next-server/server/router'
-import { Router } from 'next/router'
-import TextInput from '../../components/text-input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 
+import MainContext from '../../contexts/main-context'
+import { AuthContext } from '../../contexts/auth-context'
+
+import Btn from '../../components/btn'
+import TextInput from '../../components/text-input'
+import MessageBox from '../../components/message-box'
+
 export default function Login() {
 	const mainContext = useContext(MainContext)
+	const authContext = useContext(AuthContext)
 	
-	const {signIn, setSignInField, signInField} = mainContext
+	const {signIn, setSignInField, signInField} = authContext
 	
 	const router = useRouter()
 
 	const handleChange = (event) => {
 		setSignInField({...signInField, [event.target.name]: event.target.value})
 	}
+
+	let logInEmailRef = useRef(null)
+	let logInPasswordRef = useRef(null)
+
+	const [emailValidity, setEmailValidity] = useState({
+		requiredError: false,
+		showCaption: {text: '', type: null}
+	})
+
+	const [passwordValidity, setPasswordValidity] = useState({
+		requiredError: false,
+		showCaption: {text: '', type: null}
+	})
+
+	const [errorCaption, setErrorCaption] = useState(null)
+
+	const validateForm = (validity=null) => {
+		if(validity === 'email' || validity === null) {
+			 if (logInEmailRef.current.value === '') {
+				setEmailValidity({...emailValidity, requiredError: true})
+				return false
+			} else if (!logInEmailRef.current.value.includes('@')) {
+				setEmailValidity({...emailValidity, showCaption: {
+					text:'لطفا آدرس ایمیل معتبری را وارد نمایید!',
+					type: 'ALERT'
+				}})
+				return false
+			} else {
+				setEmailValidity({requiredError: false, showCaption:{text: '', type: null}})
+			}
+		}
+
+		if (validity === 'password' || validity === null) {
+			if(logInPasswordRef.current.value === '') {
+				setPasswordValidity({...passwordValidity, requiredError: true})
+				return false
+			} else {
+				setPasswordValidity({requiredError: false, showCaption: {text: '', type: null}})
+			}
+		}
+
+		return true
+	}
+
+	const [loading, setLoading] = useState(false)
 	
-	const handleSubmit = (event) => {
-		event.preventDefault()
-		//setAuthentication({authenticated: authentication.authenticated, loading: true})
-		signIn()
-			.then(response => {
-				console.log(response)
-				router.push('/')
-			})
-			.catch(error => {
-				console.log(`Login Error: ${error}`)
-			})
+	const submitLogIn = (e) => {
+		if (e !== undefined) e.preventDefault()
+		setLoading(true)
+		if(validateForm()) {
+			signIn()
+				.then(response => {
+					setLoading(false)
+					router.push({pathname: '/'})
+				})
+				.catch(error => {
+					setLoading(false)
+					console.log(error.status)
+					if(error.toString().includes('No user found with that email, or password invalid.')) {
+						setErrorCaption('هیج حساب کاربری با این نشانی رایانامه و یا رمز عبور یافت نشد.')
+					} else if(error.toString().includes('Email not confirmed')) {
+						setErrorCaption('نشانی رایانامه تایید نشده. برای تایید آن به ایمیلی که برای این نشانی ارسال شده مراجعه نموده و روی لینک تایید رایانامه کلیک کنید.')
+					} else if(error.status === undefined) {
+						setErrorCaption('امکان برقراری ارتباط نیست. لطفا اتصال خود به اینترنت را چک کنید.')
+					}
+				})
+		} else {
+			setLoading(false)
+		}
 	}
 	
 	const loginWrapperStyle = {
@@ -58,7 +117,7 @@ export default function Login() {
 	
 	return (
 		<div dir="rtl" className="login__wrapper" style={loginWrapperStyle}>
-			<form className="login__form__wrapper login" style={loginFormWrapperStyle} onSubmit={handleSubmit}>
+			<form className="login__form__wrapper login" style={loginFormWrapperStyle} onSubmit={submitLogIn}>
 				<div
 				className="login__form__fields__Wrapper">
 				<div className="login__fields__top-wrapper">
@@ -74,6 +133,7 @@ export default function Login() {
 					name='email'
 					required
 					onChange={handleChange}
+					ref={logInEmailRef}
 					/>
 					<TextInput
 					title={(
@@ -86,7 +146,13 @@ export default function Login() {
 					name='password'
 					required
 					onChange={handleChange}
+					ref={logInPasswordRef}
 					/>
+					{errorCaption !== null &&
+						<MessageBox
+						message={errorCaption}
+						type='warning'/>
+					}
 				</div>
 				<div className="submit__wrapper">
 					<span style={explanationFontStyle}>همچنان حساب باز نكرده ايد؟
@@ -101,7 +167,7 @@ export default function Login() {
 							</span>
 						</Link>
 					</span>
-					<Btn text="ورود به حساب" fullWidth onClick={handleSubmit} />
+					<Btn spinner={loading} text="ورود به حساب" fullWidth={!loading} onClick={submitLogIn} />
 				</div>
 				</div>
 				<div className="book-shelf-cover">
