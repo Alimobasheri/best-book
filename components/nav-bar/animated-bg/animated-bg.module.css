@@ -1,0 +1,36 @@
+@keyframes grow-slide {
+  to {
+    transform: scaleY(1) translateZ(0) translateY(-50%) rotate(30deg) translateX(25%);
+  }
+}
+.wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  display: none;
+  perspective: 100px;
+}
+.wrapper span {
+  display: block;
+  content: "";
+  position: relative;
+  width: 200vw;
+  height: 40vh;
+  transform: scaleY(0) translateZ(-50px) rotate(30deg) translateY(-50%) translateX(25%);
+  transition: all 1s 0.3s ease;
+}
+.wrapper.toggled {
+  display: block;
+}
+.wrapper.toggled span {
+  animation: grow-slide 1s ease-in-out 0.2s 1 forwards;
+  animation-name: grow-slide;
+  animation-duration: 1s;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+}
+
+/*# sourceMappingURL=animated-bg.module.css.map */
