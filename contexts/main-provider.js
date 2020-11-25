@@ -1,21 +1,8 @@
 import MainContext from './main-context'
-import auth from '../components/identity'
 
 import {useEffect, useState} from 'react'
 
 const MainProvider = (props) => {
-	const [signInField, setSignInField] = useState({email: '', password: ''})
-
-	const currentUser = auth.currentUser()
-
-	const signUp = (email, password) => {
-		return auth.signup(email, password)
-	}
-
-	const signIn = () => {
-		return auth.login(signInField.email, signInField.password)
-	}
-
     const theme = {
 		light: {
 			primaryBackgroundColor: "#F8F9FB",
@@ -37,7 +24,7 @@ const MainProvider = (props) => {
 	useEffect(() => {
 		const fetchBooks = () => { return new Promise((resolve, reject) => {
 			const xhttp = new XMLHttpRequest()
-			xhttp.open('GET', './data/books.json')
+			xhttp.open('GET', '/data/books.json')
 			xhttp.onload = () => {
 				resolve(xhttp.responseText)
 			}
@@ -54,7 +41,7 @@ const MainProvider = (props) => {
 	useEffect(() => {
 		const fetchLists = () => { return new Promise((resolve, reject) => {
 			const xhttp = new XMLHttpRequest()
-			xhttp.open('GET', './data/home-lists.json')
+			xhttp.open('GET', '/data/home-lists.json')
 			xhttp.onload = () => {
 				resolve(xhttp.responseText)
 			}
@@ -77,11 +64,6 @@ const MainProvider = (props) => {
 	const [endCompMockUp, setEndCompMockUp] = useState('')
 	
 	const contextValue = {
-		signInField,
-		setSignInField,
-		currentUser,
-		signUp,
-		signIn,
 		allIsLoaded: () => {return !data.isFetching},
 		books: data.books,
 		homeLists,
