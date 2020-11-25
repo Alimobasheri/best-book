@@ -113,6 +113,10 @@
 	.list__title {
 		padding-bottom: 4vh;
 	}
+	.list.full-width > .list__title {
+		padding: 0;
+		max-height: 0;
+	}
 	.list__card__row {
 		min-width: 10vw !important;
 		max-width: 10vw !important;
