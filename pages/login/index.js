@@ -6,15 +6,15 @@ import {useRouter} from 'next/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 
-import MainContext from '../../contexts/main-context'
+import {ThemeContext} from '../../contexts/theme-context'
 import { AuthContext } from '../../contexts/auth-context'
 
-import Btn from '../../components/btn'
+import Btn from '../../components/button/'
 import TextInput from '../../components/text-input'
 import MessageBox from '../../components/message-box'
 
 export default function Login() {
-	const mainContext = useContext(MainContext)
+	const {theme} = useContext(ThemeContext)
 	const authContext = useContext(AuthContext)
 	
 	const {signIn, setSignInField, signInField} = authContext
@@ -96,30 +96,30 @@ export default function Login() {
 	}
 	
 	const loginWrapperStyle = {
-		backgroundColor: mainContext.theme.primaryaryBackgroundColor
+		backgroundColor: theme.primaryaryBackgroundColor
 	}
 	
 	const loginFormWrapperStyle = {
-		backgroundColor: mainContext.theme.secondaryBackgroundColor
+		backgroundColor: theme.secondaryBackgroundColor
 	}
 	
 	const titleFontStyle = {
-		color: mainContext.theme.primaryFontColor
+		color: theme.primaryFontColor
 	}
 	
 	const explanationFontStyle = {
-		color: mainContext.theme.secondaryFontColor
+		color: theme.secondaryFontColor
 	}
 	
 	const textInputStyle = {
-		backgroundColor: mainContext.theme.primaryBackgroundColor
+		backgroundColor: theme.primaryBackgroundColor
 	}
 	
 	return (
 		<div dir="rtl" className="login__wrapper" style={loginWrapperStyle}>
 			<form className="login__form__wrapper login" style={loginFormWrapperStyle} onSubmit={submitLogIn}>
 				<div
-				className="login__form__fields__Wrapper">
+				className="login__form__fields__Wrapper vh-fix">
 				<div className="login__fields__top-wrapper">
 					<h1 className="login__title bb-typography__header" style={titleFontStyle}>ورود به حساب كاربرى</h1>
 					<TextInput
@@ -160,7 +160,7 @@ export default function Login() {
 							<span 
 							className="no-account__link" 
 							style={{
-								color: mainContext.theme.primaryFontColor,
+								color: theme.primaryFontColor,
 								cursor: 'pointer'
 							}}>
 								 ثبت نام كنيد

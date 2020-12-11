@@ -2,14 +2,18 @@ import {useContext} from 'react'
 
 import HEAD from 'next/head'
 
+import styles from './home.module.css'
+
 import MainContext from '../contexts/main-context'
+import {ThemeContext} from '../contexts/theme-context'
 
 import List from '../components/list'
 import Carousel from '../components/carousel/carousel'
-import AdvertisementCarouselItems from '../components/advertisement-carousel'
+import AdvertisementCarouselItems from '../components/advertisement-carousel/'
 
 export default function Home() {
 	const mainContext = useContext(MainContext)
+	const {theme} = useContext(ThemeContext)
 	const {books, homeLists, selectedBook} = mainContext
 
 	const carouselNewItems = [
@@ -49,23 +53,15 @@ export default function Home() {
 		selectedBook != '' ?
 			<List view={'column'} title={''} books={[...books].filter(book => book.id == selectedBook)} information /> :
 			<React.Fragment>
-				<div 
-				className="home-hero">
-				</div>
-				<div className='home__carousel__wrapper'>
+				<div className={styles['home__carousel__wrapper']}>
 					<Carousel
 					items={advertiseItems}
 					maxWidth={'80vw'} />
 				</div>
 				{homeListsEls}
-				<style jsx>{`
-					.page-header {
-						color: ${mainContext.theme.primaryFontColor}
-					}
-				`}</style>
 			</React.Fragment>
 	return(
-		<div dir="rtl" className='home__wrapper'>
+		<div dir="rtl" className={styles['home__wrapper']}>
         	<HEAD>
         		<title>بست بوک | خانه</title>
         	</HEAD>

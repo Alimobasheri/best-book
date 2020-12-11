@@ -1,0 +1,14 @@
+.home__carousel__wrapper {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+@media only screen and (min-width: 1200px) and (min-height: 300px) {
+    .home__wrapper {
+        overflow: hidden;
+        padding: 2%;
+    }
+}

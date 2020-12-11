@@ -1,0 +1,154 @@
+@font-face {
+	font-family: ShabnamRegular;
+	src: url("https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam.ttf");
+}
+
+@font-face {
+	font-family: ShabnamBold;
+	src: url("https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam-Bold.ttf");
+}
+
+// Font Size variables
+$fontHeader_xs: 20px;
+$fontHeader_md: 25px;
+$fontHeader_lg: 28px;
+
+$fontTitle_xs: 16px;
+$fontTitle_md: 20px;
+$fontTitle_lg: 22px;
+
+$fontTitle2_xs: 14px;
+$fontTitle2_md: 17px;
+$fontTitle2_lg: 18.5px;
+
+$fontBody_xs: 12px;
+$fontBody_md: 14px;
+$fontBody_lg: 15px;
+
+$fontNavLink_xs: 20px;
+$fontNavLink_md: 22px;
+$fontNavLink_lg: 23px;
+
+$fontBody2_xs: 10px;
+$fontBody2_md: 12px;
+$fontBody2_lg: 14px;
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: ShabnamRegular, "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+*:active, *:focus {
+  outline: none;
+}
+
+html, body, #root {
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+body {
+  background-color: #F8F9FB;
+  overflow: hidden;
+}
+
+#root {
+  overflow: hidden;
+}
+
+.bb-typography__header {
+	font-size: $fontHeader_xs;
+}
+
+.bb-typography__title {
+	font-size: $fontTitle_xs;
+}
+
+.bb-typography__title2 {
+	font-size: $fontTitle2_xs;
+}
+
+.bb-typography__body {
+	font-size: $fontBody_xs;
+}
+
+.bb-typography__body2 {
+	font-size: $fontBody2_xs;
+}
+
+.bb-typography__nav-link {
+	font-size: $fontNavLink_xs;
+	font-weight: 900px;
+}
+
+.empty-required-input {
+	border: 1px solid red !important;
+}
+
+@media only screen and (min-width: 768px) {
+	.page-header {
+		font-family: ShabnamBold;
+		font-size: $fontHeader_md;
+		font-weight: 900;
+	}
+
+	.bb-typography__header {
+		font-size: $fontHeader_md;
+	}
+
+	.bb-typography__title {
+		font-size: $fontTitle_md;
+	}
+
+	.bb-typography__title2 {
+		font-size: $fontTitle2_md;
+	}
+
+	.bb-typography__body {
+		font-size: $fontBody_md;
+  }
+  
+  .bb-typography__body2 {
+    font-size: $fontBody2_md;
+  }
+
+	.bb-typography__nav-link {
+		font-size: $fontNavLink_md;
+	}
+}
+
+@media only screen and (min-width: 1200px) and (min-height: 300px) {
+  #__next {
+    height: 100%;
+  }
+  .page-header {
+    font-size: $fontHeader_lg;
+    font-weight: 900;
+  }
+
+  .bb-typography__header {
+    font-size: $fontHeader_lg;
+  }
+
+  .bb-typography__title {
+    font-size: $fontTitle_lg;
+  }
+
+  .bb-typography__title2 {
+    font-size: $fontTitle2_lg;
+  }
+
+  .bb-typography__body {
+    font-size: $fontBody_lg;
+  }
+
+  .bb-typography__body2 {
+    font-size: $fontBody2_lg;
+  }
+
+  .bb-typography__nav-link {
+    font-size: $fontNavLink_lg;
+  }
+}

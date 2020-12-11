@@ -22,7 +22,7 @@ export default function SignupCarousel({height}) {
             <div
             className='signup-carousel__part'>
                 <span
-                className='signup-carousel__part__caption bb-typography__title'>
+                className='signup-carousel__part__caption bb-typography__title vh-fix'>
                     {item.caption}
                 </span>
             </div>

@@ -1,12 +1,12 @@
-import MainContext from '../contexts/main-context'
 import {useEffect, useContext} from 'react'
-//const {useLocation} = ReactRouterDOM
+
 import {useRouter} from 'next/router'
+
+import MainContext from '../contexts/main-context'
 
 export default function ScrollManager ({getAppBodyWrapperRef}) {
 	const mainContext = useContext(MainContext)
 	
-	//const location = useLocation()
 	const router = useRouter()
 	
 	useEffect( () => {

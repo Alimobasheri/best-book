@@ -1,16 +1,21 @@
 import {useState, useEffect, useContext} from 'react'
+
 import {useRouter} from 'next/router'
+
+import styles from './address-bar.module.css'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons'
 
-import MainContext from '../contexts/main-context'
+import MainContext from '../../contexts/main-context'
+import {ThemeContext} from '../../contexts/theme-context'
 
 export default function AddressBar() {
     const router = useRouter()
     const {pathname} = router
 
     const mainContext = useContext(MainContext)
+    const {theme} = useContext(ThemeContext)
 
     const convertPathToNames = (path) => {
         const pathParts = pathname.split('/')
@@ -55,11 +60,11 @@ export default function AddressBar() {
 
     return (
         <div
-        className='address-bar'>
+        className={`${styles['address-bar']} address-bar`}>
             {pathNames.map((name, idx) =>
                 <React.Fragment>
                     <span
-                    className='address-bar__path-name'>
+                    className={styles['path-name']}>
                         {name}
                     </span>
                     {idx >= 0 && idx < pathNames.length-1 && 
@@ -69,20 +74,8 @@ export default function AddressBar() {
             )}
             <style jsx>{`
                 .address-bar {
-                    display: flex;
-                    flex-flow: row nowrap;
-                    justify-content: flex-start;
-                    align-items: center;
-                    width: 100%;
-                    max-width: 100%;
-                    background-color: ${mainContext.theme.primaryBackgroundColor};
-                    color: ${mainContext.theme.primaryFontColor};
-                    padding: 3vh 2vw;
-                    margin: 0 auto;
-                }
-                .address-bar__path-name {
-                    display: block;
-                    padding: 1vh 2vw;
+                    background-color: ${theme.primaryBackgroundColor};
+                    color: ${theme.primaryFontColor};
                 }
             `}</style>
         </div>

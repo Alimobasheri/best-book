@@ -1,15 +1,19 @@
 import {useContext} from 'react'
 
-import MainContext from '../contexts/main-context'
+import {ThemeContext} from '../contexts/theme-context'
 
 export default function Loader () {
-	const mainContext = useContext(MainContext)
-	const loaderStyle = {
-		backgroundColor: mainContext.theme.primaryFontColor
-	}
+	const {theme} = useContext(ThemeContext)
+
 	return (
 		<React.Fragment>
-			<span className="loader ping" style={loaderStyle}></span>
+			<span 
+			className="loader ping"></span>
+			<style jsx>{`
+				.loader {
+					background-color: ${theme.primaryFontColor};
+				}
+			`}</style>
 		</React.Fragment>
 	)
 }

@@ -30,7 +30,7 @@ export default function Search() {
             }
             <style jsx>{`
                 .search-page__wrapper {
-                    padding: 3vh 2vw;
+                    padding: 2.5vw 2vw;
                 }
             `}</style>
         </div>

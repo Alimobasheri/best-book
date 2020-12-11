@@ -33,7 +33,7 @@ export default function NavBar() {
         <React.Fragment>
             <AnimatedBG toggled={mobileNavbarOpen} animationDuration={animationDelay} />
         <nav
-        className={`${styles.navBar} ${showNavbarItems && styles.toggled} nav-bar ${showNavbarItems && 'toggled'}`}>
+        className={`${styles.navBar} ${showNavbarItems && styles.toggled} nav-bar ${showNavbarItems && 'toggled'} vh-fix`}>
             <div
             className={styles.wrapper}>
                 <div

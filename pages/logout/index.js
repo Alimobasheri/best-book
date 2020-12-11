@@ -1,12 +1,10 @@
 import {useEffect, useContext} from 'react'
 import {useRouter} from 'next/router'
 
-import MainContext from '../../contexts/main-context'
 import { ThemeContext } from '../../contexts/theme-context'
 import { AuthContext } from '../../contexts/auth-context'
 
 import MessageBox from '../../components/message-box'
-import Loader from '../../components/loader'
 
 export default function Logout () {
 	const { theme } = useContext(ThemeContext)

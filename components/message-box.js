@@ -27,7 +27,7 @@ export default function MessageBox({message, type}) {
     }
     return (
         <div
-        className={`message-box__wrapper ${type} bb-typography__title`}>
+        className={`message-box__wrapper ${type} bb-typography__title vh-fix`}>
             <span
             className="message-box__icon">
                 {setBoxIcon()}

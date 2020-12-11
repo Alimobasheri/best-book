@@ -1,41 +1,42 @@
+import {useState, useEffect, useRef, useContext} from 'react'
+
+import {useRouter} from 'next/router'
 import HEAD from 'next/head'
 
+import styles from './_app.module.css'
+
 import '../styles/globals.css'
-import '../styles/index.css'
-import '../styles/home.css'
 import '../styles/about-us.css'
 import '../styles/login.css'
 import '../styles/transition-manager.css'
 import '../styles/loader.css'
-import '../styles/btn.css'
 import '../styles/hamburger-button.css'
 import '../styles/tab-btn.css'
 import '../styles/close-btn.css'
 import '../styles/search-bar.css'
-import '../styles/book-card.css'
 import '../styles/book-preview.css'
 import '../styles/list.css'
-import '../styles/nav.css'
 
 import MainContext from '../contexts/main-context'
 import MainProvider from '../contexts/main-provider'
-import { ThemeProvider } from '../contexts/theme-context'
+import { ThemeProvider, ThemeContext } from '../contexts/theme-context'
 import { NavProvider } from '../contexts/nav-context'
 import { AuthProvider } from '../contexts/auth-context'
+
+import VhFix from '../components/vh-fix'
 
 import TransitionManager from '../components/transition-manager'
 import ScrollManager from '../components/scroll-manager'
 
-import {useState, useEffect, useRef, useContext} from 'react'
-import {useRouter} from 'next/router'
-import Nav from '../components/nav'
+import Nav from '../components/nav/'
 import NavBar from '../components/nav-bar'
-import AddressBar from '../components/address-bar'
-import SearchBar from '../components/search-bar'
+import AddressBar from '../components/address-bar/'
 
 const MainApp = ({ Component, pageProps }) => {
   const mainContext = useContext(MainContext)
   const {searchMode, searchText} = mainContext
+
+  const {theme} = useContext(ThemeContext)
 
   const [mobileNavbarToggled, setMobileNavbarToggled] = useState(false) 
 
@@ -69,13 +70,13 @@ const MainApp = ({ Component, pageProps }) => {
         <HEAD>
           <title>بست بوک</title>
         </HEAD>
-			  <div dir='rtl' className='app-wrapper' style={{backgroundColor: mainContext.theme.primaryBackgroundColor}}>
+			  <div dir='rtl' className={`${styles['app-wrapper']} app-wrapper`}>
         <NavBar />
           <TransitionManager>
 				    <Nav />
-				    <div className='app-body__wrapper' ref={_appBodyWrapper}>
+				    <div className={`${styles['app-body__wrapper']} vh-fix`} ref={_appBodyWrapper}>
 					    <ScrollManager getAppBodyWrapperRef={getAppBodyWrapper} />
-                <div className='top-bar'>
+                <div className={`${styles['top-bar']} top-bar`}>
                   <AddressBar />
                 </div>
                 <Component {...pageProps} />
@@ -83,15 +84,11 @@ const MainApp = ({ Component, pageProps }) => {
             </TransitionManager>
 			  </div>
         <style jsx>{`
+          .app-wrapper {
+            background-color: ${theme.primaryBackgroundColor};
+          },
           .top-bar {
-            width: 100%;
-            position: relative;
-            z-index: 5;
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: flex-start;
-            align-items: center;
-            background-color: ${mainContext.theme.primaryBackgroundColor}
+            background-color: ${theme.primaryBackgroundColor};
           }
         `}</style>
       </React.Fragment>
@@ -104,6 +101,7 @@ export default function Render({Component, pageProps}) {
       <ThemeProvider>
         <NavProvider>
           <AuthProvider>
+            <VhFix />
             <MainApp Component={Component} pageProps={pageProps} />
           </AuthProvider>
         </NavProvider>

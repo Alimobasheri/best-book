@@ -1,15 +1,17 @@
 import {useEffect, useContext, useState} from 'react'
 
 import MainContext from '../../contexts/main-context'
+import {ThemeContext} from '../../contexts/theme-context'
 
 import MessageBox from '../../components/message-box'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSync } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import Btn from '../../components/btn'
+import Btn from '../../components/button/'
 
 export default function Verification() {
     const mainContext = useContext(MainContext)
+    const {theme} = useContext(ThemeContext)
 
     let STATUS = {
         LOADING: "LOADING",
@@ -110,7 +112,7 @@ export default function Verification() {
                 .verification__message-box__wrapper {
                     width: 75%;
                     margin: auto;
-                    background-color: ${mainContext.theme.secondaryBackgroundColor};
+                    background-color: ${theme.secondaryBackgroundColor};
                     padding: 5vh 4vw;
                     border-radius: 25px;
                     box-shadow: 0px 1px 20px rgba(30, 30, 30, 0.1);

@@ -24,7 +24,11 @@ export default function BookPreview () {
 	}
 	
 	const bookPreview = 
-		<List view={'column'} title={''} books={[...books].filter(book => book.id == book_id)} information closeCallback={slideOut} />
+		<List 
+		view={'column'} 
+		title={''} books={[...books].filter(book => book.id == book_id)} 
+		information 
+		closeCallback={slideOut} />
 	return (
 		<React.Fragment>
 			<Head>

@@ -1,0 +1,15 @@
+.address-bar {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 6px 12px;
+    margin: 0 auto;
+    & .path-name {
+        display: block;
+        padding: 1.5vh 2vw;
+        cursor: pointer;
+    }
+}

@@ -5,16 +5,16 @@ import {useRouter} from 'next/router'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
 
-import MainContext from '../../contexts/main-context'
+import {ThemeContext} from '../../contexts/theme-context'
 import { AuthContext } from '../../contexts/auth-context'
 
-import Btn from '../../components/btn'
+import Btn from '../../components/button/'
 import TextInput from '../../components/text-input'
 import MessageBox from '../../components/message-box'
 import SignupCarousel from '../../components/signup-carousel'
 
 export default function SignUp () {
-	const mainContext = useContext(MainContext)
+	const {theme} = useContext(ThemeContext)
 	const { signUp } = useContext(AuthContext)
 
 	const router = useRouter()
@@ -106,23 +106,23 @@ export default function SignUp () {
 	})
 	
 	const loginWrapperStyle = {
-		backgroundColor: mainContext.theme.primaryaryBackgroundColor
+		backgroundColor: theme.primaryaryBackgroundColor
 	}
 	
 	const loginFormWrapperStyle = {
-		backgroundColor: mainContext.theme.secondaryBackgroundColor
+		backgroundColor: theme.secondaryBackgroundColor
 	}
 	
 	const titleFontStyle = {
-		color: mainContext.theme.primaryFontColor
+		color: theme.primaryFontColor
 	}
 	
 	const explanationFontStyle = {
-		color: mainContext.theme.secondaryFontColor
+		color: theme.secondaryFontColor
 	}
 	
 	const textInputStyle = {
-		backgroundColor: mainContext.theme.primaryBackgroundColor
+		backgroundColor: theme.primaryBackgroundColor
 	}
 	return (
 		<div dir="rtl" className="login__wrapper" style={loginWrapperStyle}>
@@ -168,7 +168,7 @@ export default function SignUp () {
 					<div className="submit__wrapper">
 						<span 
 						className="no-account bb-typography__body"
-						style={{color: mainContext.theme.primaryFontColor}}>در بست بوك داراى حساب كاربرى هستيد؟
+						style={{color: theme.primaryFontColor}}>در بست بوك داراى حساب كاربرى هستيد؟
 							<Link href='/login'>
 								<span className="no-account__link bb-typography__body"> وارد شويد</span>
 							</Link>

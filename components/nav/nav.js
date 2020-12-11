@@ -6,14 +6,17 @@ import {useRouter} from 'next/router'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBookReader, faAddressCard, faSignInAlt, faUserPlus} from '@fortawesome/free-solid-svg-icons'
 
-import MainContext from '../contexts/main-context'
-import { NavContext } from '../contexts/nav-context'
-import { AuthContext } from '../contexts/auth-context'
+import styles from './nav.module.css'
 
-import HamburgerButton from '../components/hamburger-button'
-import Btn from '../components/btn'
-import ThemeSwitch from './theme-switch/index'
-import SearchBar from './search-bar'
+import MainContext from '../../contexts/main-context'
+import { NavContext } from '../../contexts/nav-context'
+import { ThemeContext } from '../../contexts/theme-context'
+import { AuthContext } from '../../contexts/auth-context'
+
+import HamburgerButton from '../hamburger-button'
+import Btn from '../button/'
+import ThemeSwitch from '../theme-switch/'
+import SearchBar from '../search-bar'
 
 export default function Nav(){
 	const [toggled, setToggled] = useState(false)
@@ -22,10 +25,11 @@ export default function Nav(){
 	const {mobileNavbarOpen, toggleMobileNavbarOpen} = useContext(NavContext)
 	const authContext = useContext(AuthContext)
 
+	const {theme} = useContext(ThemeContext)
+
 	const router = useRouter()
 
 	const toggleMobileNavbar = () => {
-		console.log(typeof toggleMobileNavbarOpen)
 		toggleMobileNavbarOpen()
 	}
 
@@ -53,34 +57,33 @@ export default function Nav(){
 	return(
 		<div 
 		dir="rtl" 
-		className={`nav ${toggled ? 'toggled' : ''}`}  
+		className={`${styles.nav} ${toggled ? styles.toggled : ''} nav vh-fix`}  
 		ref={_navWrapper}>
 			<div 
-			className="nav__wrapper">
+			className={styles['brand-logo']+' vh-fix'}>
 				<Link 
 				href="/" 
 				style={{textDecoration: 'none'}}>
 					<div 
-					className="nav-brand__wrapper">
+					className={styles["nav-brand"]}>
 						<h1 
-						className="nav-brand__h1 bb-typography__header" 
-						style={{color: mainContext.theme.primaryFontColor}}>
+						className={`${styles["nav-brand__h1"]} nav-brand__h1 bb-typography__header`}>
 							بست بوك
 						</h1>
 					</div>
 				</Link>
 				<div 
-				className="nav-hamburger">
+				className={styles['nav-hamburger']}>
 					<HamburgerButton 
-					lineColor={mainContext.theme.primaryFontColor} 
+					lineColor={theme.primaryFontColor} 
 					toggled={mobileNavbarOpen} 
 					toggle={toggleMobileNavbar}/>
 				</div>
 			</div>
 			<div 
-			className={`nav-items__wrapper ${toggled ? 'toggled' : ''}`}>
+			className={`${styles['nav-items']} ${toggled ? styles['toggled'] : ''} vh-fix`}>
 				<div 
-				className='nav__searchBar'>
+				className={styles['search-bar']+' vh-fix'}>
 					<SearchBar/>
 				</div>
 				<div>
@@ -88,11 +91,7 @@ export default function Nav(){
 					href="/" 
 					style={{textDecoration: 'none', minWidth:'100%'}}>
 						<span 
-						className={`link-item ${router.pathname === '/' && 'active'} bb-typography__nav-link`} 
-						style={{
-							color: mainContext.theme.primaryFontColor, 
-							borderBottomColor: mainContext.theme.primaryFontColor
-						}}>
+						className={`${styles['link-item']} link-item ${router.pathname === '/' && `${styles['active']} active`} bb-typography__nav-link vh-fix`}>
 							کتابگردی <FontAwesomeIcon icon={faBookReader} />
 						</span>
 					</Link>
@@ -102,11 +101,7 @@ export default function Nav(){
 					href="/about-us" 
 					style={{textDecoration: 'none'}}>
 						<span 
-						className={`link-item ${router.pathname === '/about-us' && 'active'} bb-typography__nav-link`} 
-						style={{
-							color: mainContext.theme.primaryFontColor, 
-							borderBottomColor: mainContext.theme.primaryFontColor
-						}}>
+						className={`${styles['link-item']} link-item ${router.pathname === '/about-us' && `${styles['active']} active`} bb-typography__nav-link vh-fix`} >
 							درباره <FontAwesomeIcon icon={faAddressCard} />
 						</span>
 					</Link>
@@ -142,27 +137,27 @@ export default function Nav(){
 					</React.Fragment>)
 			}
 				<div
-				className="theme-switch__Wrapper">
+				className={styles['theme-switch']}>
 					<ThemeSwitch />
 				</div>
 			</div>
 			<style jsx>{`
 				.nav {
-					background-color: ${mainContext.theme.primaryBackgroundColor}
+					background-color: ${theme.primaryBackgroundColor}
+				}
+
+				.nav-brand__h1 {
+					color: ${theme.primaryFontColor};
+				}
+
+				.link-item {
+					color: ${theme.primaryFontColor}; 
+					border-bottom-color: ${theme.primaryFontColor};
 				}
 
 				@media only screen and (min-width: 1200px) {
 					.nav {
-						background-color: ${mainContext.theme.secondaryBackgroundColor};
-						box-shadow: -5px 0px 10px rgba(30, 30, 30, 0.1);
-						z-index: 6;
-					}
-					.link-item.active {
-						background-color: ${mainContext.theme.primaryBackgroundColor};
-						border-bottom: 0px;
-						transition: background-color 0.3s ease;
-						box-shadow: 0px 0px 1px rgba(8, 9, 10, 0.2),
-									1px 1px 2px rgba(8, 9, 10, 0.1);
+						background-color: ${theme.secondaryBackgroundColor};
 					}
 				}
 			`}</style>

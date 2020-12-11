@@ -1,13 +1,18 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 
 import MainContext from '../contexts/main-context'
-import BookCard from './book-card'
+import {ThemeContext} from '../contexts/theme-context'
+
+import BookCard from './book-card/'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faLayerGroup, faPlus, faLandmark} from '@fortawesome/free-solid-svg-icons'
 
 export default function List ({view, title, iconType, books, information, closeCallback}) {
 	const [scroll, setScroll] = useState(false)
+
+	const mainContext = useContext(MainContext)
+	const {theme} = useContext(ThemeContext)
 
 	const SetListIcon = (iconType) => {
 		switch(iconType) {
@@ -25,23 +30,34 @@ export default function List ({view, title, iconType, books, information, closeC
 		if(books.length > 0) setTimeout(() => setScroll(true), 700)
 	})
 	return (
-		<MainContext.Consumer>
-		{context =>
-		<div className={`list ${information && 'full-width'}`}>
-			<h1 className="list__title bb-typography__title">
+		<div 
+		className={`list ${information && 'full-width'}`}>
+			<h1 
+			className="list__title bb-typography__title">
 				{SetListIcon(iconType)}  {title}
 			</h1>
 			{books && books.length > 0 ?
-				<div className={`list__wrapper list__wrapper__${view == 'column' ? 'column' : 'row'} ${information && 'full-width'} ${scroll ? 'webkit-scroll' : ''}`} >
+				<div 
+				className={`list__wrapper list__wrapper__${view == 'column' ? 'column' : 'row'} ${information && 'full-width'} ${scroll ? 'webkit-scroll' : ''}`} >
 					{
 						books.map((book, i) =>
-							<div className={`list__card__${view}`} key={i}>
-								<BookCard view={view} book={book} information={information} onClickFn={context.setSelectedBook} closeCallback={closeCallback} />
+							<div 
+							className={`list__card__${view}`} key={i}>
+								<BookCard 
+								view={view} 
+								book={book} 
+								information={information} 
+								onClickFn={mainContext.setSelectedBook} 
+								closeCallback={closeCallback} />
 							</div>
 						)
 					}
 				</div> :
-				<h1 className="empty-list__text" style={{color: context.theme.secondaryFontColor}}>كتابى موجود نمى باشد.</h1>
+				<h1 
+				className="empty-list__text" 
+				style={{color: theme.secondaryFontColor}}>
+					كتابى موجود نمى باشد.
+				</h1>
 			}
 			<style jsx>
 				{`
@@ -50,11 +66,11 @@ export default function List ({view, title, iconType, books, information, closeC
 					}
 
 					.list__title {
-						color: ${context.theme.primaryFontColor}
+						color: ${theme.primaryFontColor}
 					}
 					@media only screen and (min-width: 768px) {
 						.list {
-							background-color: ${context.theme.secondaryBackgroundColor}
+							background-color: ${theme.secondaryBackgroundColor}
 						}
 					}
 					@media only screen and (min-width: 1200px) and (min-height: 300px) {
@@ -65,8 +81,8 @@ export default function List ({view, title, iconType, books, information, closeC
 							padding: 0;
 						}
 						.list__title {
-							color: ${context.theme.primaryBackgroundColor};
-							background-color: ${context.theme.primaryFontColor};
+							color: ${theme.primaryBackgroundColor};
+							background-color: ${theme.primaryFontColor};
 							border-top-left-radius: 20px;
 							border-top-right-radius: 20px;
 						}
@@ -78,7 +94,5 @@ export default function List ({view, title, iconType, books, information, closeC
 				`}
 			</style>
 		</div>
-		}
-		</MainContext.Consumer>
 	)
 }

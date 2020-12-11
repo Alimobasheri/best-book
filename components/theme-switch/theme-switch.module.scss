@@ -2,7 +2,7 @@
 	width: 40px;
 	height: 40px;
     position: relative;
-    .btn {
+    & .btn {
         width: 100%;
 	    height: 100%;
 	    border-radius: 8px;
@@ -44,7 +44,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-	.theme-switch {
+	.wrapper {
 		width: 80px;
 		max-width: 80px;
 		height: 80px;

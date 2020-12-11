@@ -1,9 +1,10 @@
 import {useContext} from 'react'
 
 import MainContext from '../contexts/main-context'
+import {ThemeContext} from '../contexts/theme-context'
 
 export default function RatingStars ({rating, rates}) {
-	const mainContext = useContext(MainContext)
+	const {theme} = useContext(ThemeContext)
 
 	const StarSVG = ({filled, gradient}) => { 
 		return (
@@ -59,13 +60,13 @@ export default function RatingStars ({rating, rates}) {
 	}
 	
 	return (
-		<div className="rating-star__wrapper">
+		<div className="rating-star__wrapper vh-fix">
 			{stars(result)}
 			<style jsx>{`
 				.rating-star__wrapper {
-					color: ${mainContext.theme.secondaryFontColor};
+					color: ${theme.secondaryFontColor};
 					padding: 0.5vh 0.5vw;
-					background-color: ${mainContext.theme.primaryBackgroundColor};
+					background-color: ${theme.primaryBackgroundColor};
 					border-radius: 30px;
 					min-width: 70px;
 					max-width: 100%;

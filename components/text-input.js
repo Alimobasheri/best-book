@@ -1,6 +1,6 @@
 import {useContext, forwardRef} from 'react'
 
-import MainContext from '../contexts/main-context'
+import {ThemeContext} from '../contexts/theme-context'
 
 const TextInput = forwardRef(({
     title,
@@ -17,14 +17,14 @@ const TextInput = forwardRef(({
     requiredError, 
     showCaption
 }, inputRef) => {
-    const mainContext = useContext(MainContext)
+    const {theme} = useContext(ThemeContext)
 
     let requiredErrorBorderColor = '#FEAAAA'
     return (
         <React.Fragment>
             <label
             for={name}
-            className='text-input__label bb-typography__title'>
+            className='text-input__label bb-typography__body'>
                 <span
                 className='text-input__label__text'>
                     {title}
@@ -32,7 +32,7 @@ const TextInput = forwardRef(({
                 <input
                 dir='ltr'
                 name={name}
-                className={`text-input__input ${requiredError && 'required'} bb-typography__body`}
+                className={`text-input__input ${requiredError && 'required'} bb-typography__body2 vh-fix`}
                 required={required}
                 type={type}
                 ref={inputRef}
@@ -44,7 +44,7 @@ const TextInput = forwardRef(({
                 {showCaption &&
                     <span
                     dir='ltr'
-                    className={`text-input__error-caption ${showCaption.type} bb-typography__body`}>
+                    className={`text-input__error-caption ${showCaption.type} bb-typography__body vh-fix`}>
                         {showCaption.text}
                     </span>
                 }
@@ -52,19 +52,19 @@ const TextInput = forwardRef(({
 
             <style jsx>{`
                 .text-input__label {
-                    padding-bottom: 2vh;
+                    padding-bottom: 1vw;
 	                width: 100%;
-                    color: ${mainContext.theme.primaryFontColor};
+                    color: ${theme.primaryFontColor};
                 }
 
                 .text-input__input {
-                    margin-top: 2vh;
+                    margin-top: 1.5vw;
                     border: none;
 	                display: block;
 	                width: 100%;
-	                padding: 2vh 2vw;
-                    color: ${mainContext.theme.primaryFontColor};
-                    background-color: ${mainContext.theme.primaryBackgroundColor};
+	                padding: 1vw 2vw;
+                    color: ${theme.primaryFontColor};
+                    background-color: ${theme.primaryBackgroundColor};
                     border-radius: 10px;
                     box-shadow: inset 0px 1px 3px rgba(60, 60, 60, 0.1);
                     text-align: 'left';
@@ -72,7 +72,7 @@ const TextInput = forwardRef(({
 
                 .text-input__input:focus {
                     outline: none;
-                    border: 1px solid ${mainContext.theme.primaryFontColor};
+                    border: 1px solid ${theme.primaryFontColor};
                 }
 
                 .text-input__error-caption {
@@ -88,7 +88,7 @@ const TextInput = forwardRef(({
 
                 @media only screen and (min-width: 768px) {
                     .text-input__label {
-                        padding-bottom: 1.5vh;
+                        padding-bottom: 1vw;
 		                width: 100%;
 		                display: flex;
 		                flex-direction: row;
