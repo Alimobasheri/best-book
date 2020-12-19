@@ -18,6 +18,7 @@ export default function Search() {
                 view={'column'}
                 title={`نتایج جستجو برای '${searchText}'`}
                 className="results-list"
+                searchResult={true}
                 books={[...books].filter(book => 
                     book.name.includes(search_query) || book.writer.includes(search_query) || book.translator.includes(search_query)
                 )} /> :
@@ -26,6 +27,7 @@ export default function Search() {
                 view='column'
                 title='نتایج جستجو'
                 className='results-list'
+                searchResult={true}
                 books={[]}/>
             }
             <style jsx>{`
