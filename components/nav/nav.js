@@ -4,7 +4,7 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faBookReader, faAddressCard, faSignInAlt, faUserPlus} from '@fortawesome/free-solid-svg-icons'
+import {faBookReader, faAddressCard, faSignInAlt, faUserPlus, faThLarge} from '@fortawesome/free-solid-svg-icons'
 
 import styles from './nav.module.css'
 
@@ -92,7 +92,17 @@ export default function Nav(){
 					style={{textDecoration: 'none', minWidth:'100%'}}>
 						<span 
 						className={`${styles['link-item']} link-item ${router.pathname === '/' && `${styles['active']} active`} bb-typography__nav-link vh-fix`}>
-							کتابگردی <FontAwesomeIcon icon={faBookReader} />
+							<FontAwesomeIcon icon={faBookReader} /> کتابگردی
+						</span>
+					</Link>
+				</div>
+				<div>
+					<Link 
+					href="/categories" 
+					style={{textDecoration: 'none', minWidth:'100%'}}>
+						<span 
+						className={`${styles['link-item']} link-item ${router.pathname === '/categories' && `${styles['active']} active`} bb-typography__nav-link vh-fix`}>
+							<FontAwesomeIcon icon={faThLarge} /> دسته بندیها
 						</span>
 					</Link>
 				</div>
@@ -102,7 +112,7 @@ export default function Nav(){
 					style={{textDecoration: 'none'}}>
 						<span 
 						className={`${styles['link-item']} link-item ${router.pathname === '/about-us' && `${styles['active']} active`} bb-typography__nav-link vh-fix`} >
-							درباره <FontAwesomeIcon icon={faAddressCard} />
+							<FontAwesomeIcon icon={faAddressCard} /> درباره
 						</span>
 					</Link>
 				</div>
@@ -158,6 +168,10 @@ export default function Nav(){
 				@media only screen and (min-width: 1200px) {
 					.nav {
 						background-color: ${theme.secondaryBackgroundColor};
+					}
+					.nav .link-item.active {
+						background: ${theme.primaryFontColor};
+						color: ${theme.primaryBackgroundColor}
 					}
 				}
 			`}</style>
