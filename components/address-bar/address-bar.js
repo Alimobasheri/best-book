@@ -30,6 +30,10 @@ export default function AddressBar() {
                     return 'درباره ی ما'
                 case 'book':
                     return 'کتابها'
+                case 'categories':
+                    return 'دسته بندیها'
+                case 'complete-profile':
+                    return 'اتمام ثبت نام'
                 case '[book_id]':
                     const {book_id} = router.query
                     return mainContext.books.filter(book => book.id == book_id)[0].name
