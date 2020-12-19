@@ -58,7 +58,10 @@ export default function Home() {
 					items={advertiseItems}
 					maxWidth={'80vw'} />
 				</div>
-				{homeListsEls}
+				<div
+				className={styles["home__lists"]}>
+					{homeListsEls}
+				</div>
 			</React.Fragment>
 	return(
 		<div dir="rtl" className={styles['home__wrapper']}>

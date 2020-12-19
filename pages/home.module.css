@@ -11,6 +11,14 @@
     overflow: hidden;
     padding: 2%;
   }
+
+  .home__lists {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 }
 
 /*# sourceMappingURL=home.module.css.map */
