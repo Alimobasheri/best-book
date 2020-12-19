@@ -160,6 +160,10 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 						.book-card__writer, .book-card__translator {
 							color: ${theme.secondaryFontColor}
 						}
+
+						.desc-comments__desc-text {
+							color: ${theme.primaryFontColor}
+						}
 						
 						@media only screen and (min-width: 1200px) and (min-height: 300px) {
 							.book-card.full-width > .book-card__cover {
@@ -172,10 +176,6 @@ export default function BookCard ({view, book, information, onClickFn, closeCall
 
 							.book-card.column.full-width > .desc-comments {
 								background-color: ${theme.secondaryBackgroundColor};
-							}
-
-							.desc-comments__desc-text {
-								color: ${theme.primaryFontColor}
 							}
 						}
 					`}
