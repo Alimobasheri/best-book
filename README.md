@@ -10,8 +10,8 @@ I haven't used a hundreds of JS libraries but instead have used fundamental tech
 ### Virtual DOM: Powered by React.js
 - More than 20 components have currently been designed and more to come.
 - Costume TextInputs, MultiSelects, Navbar, Hamburger Button, A very responsive nav, A costume Theme Switching Button created by CSS and React and many more...
-### Design is not how it looks, but how it works: CSS 3 & SCSS Styled JSX & CSS Modules import
-- By SCSS powerful variables and hirachical scopes which make it easier to maintain component designation.
+### Design is not how it looks, but how it works: CSS 3 & SCSS & Styled JSX & CSS Modules import
+- By SCSS powerful variables and hirarchical scopes which make it easier to maintain component designation.
 - Using CSS 3 Flexbox, Shadows, Transitions and many other properties brought the application to life.
 - Theme injection has been done using Next.js' support of styled JSX tags.
 - CSS modules make it no pain to create styles with no confilctions.
