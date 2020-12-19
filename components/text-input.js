@@ -32,7 +32,7 @@ const TextInput = forwardRef(({
                 <input
                 dir='ltr'
                 name={name}
-                className={`text-input__input ${requiredError && 'required'} bb-typography__body2 vh-fix`}
+                className={`text-input__input ${requiredError && 'required'} bb-typography__body vh-fix`}
                 required={required}
                 type={type}
                 ref={inputRef}
@@ -52,17 +52,17 @@ const TextInput = forwardRef(({
 
             <style jsx>{`
                 .text-input__label {
-                    padding-bottom: 1vw;
+                    padding-bottom: 10px;
 	                width: 100%;
                     color: ${theme.primaryFontColor};
                 }
 
                 .text-input__input {
-                    margin-top: 1.5vw;
+                    margin-bottom: 15px;
                     border: none;
 	                display: block;
 	                width: 100%;
-	                padding: 1vw 2vw;
+	                padding: 15px 15px;
                     color: ${theme.primaryFontColor};
                     background-color: ${theme.primaryBackgroundColor};
                     border-radius: 10px;
@@ -98,12 +98,12 @@ const TextInput = forwardRef(({
                     }
 
                     .text-input__error-caption {
-                        padding: 0.7vh 1.5vw;
+                        padding: 0.5vw 1.5vw;
 		                width: 100%;
                     }
 
                     .text-input__input {
-                        padding: 1.5vh 1.5vw;
+                        padding: 1vw 1.5vw;
 		                width: 66.666%;
                     }
                 }
