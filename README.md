@@ -5,6 +5,8 @@ This is a comprehensive work sample designed and in progress by me, showing my m
 At it's core, this project is simply an online book store. Of course an examplary one.
 Nothing is really sold there, but it's an application working on the cloud. So let's see how it's built...
 
+## To be deployed
+
 ## What technologies does it use?
 I haven't used a hundreds of JS libraries but instead have used fundamental technologies and built everything upon them:
 ### Virtual DOM: Powered by React.js
