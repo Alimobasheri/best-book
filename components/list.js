@@ -8,7 +8,7 @@ import BookCard from './book-card/'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faLayerGroup, faPlus, faLandmark} from '@fortawesome/free-solid-svg-icons'
 
-export default function List ({view, title, iconType, books, information, closeCallback}) {
+export default function List ({view, title, iconType, books, information, searchResult, closeCallback}) {
 	const [scroll, setScroll] = useState(false)
 
 	const mainContext = useContext(MainContext)
@@ -31,7 +31,7 @@ export default function List ({view, title, iconType, books, information, closeC
 	})
 	return (
 		<div 
-		className={`list ${information && 'full-width'}`}>
+		className={`list ${information && 'full-width'} ${searchResult ? 'search-result' : ''}`}>
 			{title && 
 				<h1 
 				className="list__title bb-typography__title">
