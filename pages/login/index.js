@@ -17,7 +17,7 @@ export default function Login() {
 	const {theme} = useContext(ThemeContext)
 	const authContext = useContext(AuthContext)
 	
-	const {signIn, setSignInField, signInField} = authContext
+	const {user, signIn, setSignInField, signInField, findUserProfile} = authContext
 	
 	const router = useRouter()
 
@@ -73,15 +73,24 @@ export default function Login() {
 	const submitLogIn = (e) => {
 		if (e !== undefined) e.preventDefault()
 		setLoading(true)
+		setErrorCaption(null)
 		if(validateForm()) {
 			signIn()
 				.then(response => {
 					setLoading(false)
-					router.push({pathname: '/'})
+					findUserProfile(response.email)
+						.then(userData => {
+							if(userData.error) {
+								router.push('/complete-profile')
+							} else {
+								router.push('/')
+							}
+						})
+						.catch(error => console.log(error))
+					//router.push({pathname: '/'})
 				})
 				.catch(error => {
 					setLoading(false)
-					console.log(error.status)
 					if(error.toString().includes('No user found with that email, or password invalid.')) {
 						setErrorCaption('هیج حساب کاربری با این نشانی رایانامه و یا رمز عبور یافت نشد.')
 					} else if(error.toString().includes('Email not confirmed')) {
@@ -191,7 +200,7 @@ export default function Login() {
 					justify-content: space-evenly;
 					align-items: center;
 					min-width:48%;
-					padding: 1vh 2vw;
+					padding: 1vw 2vw;
 				}
 				.book-shelf-cover {
 					width: 48%;
@@ -206,6 +215,24 @@ export default function Login() {
 					background-repeat: no-repeat;
 					background-size: cover;
 					background-position: center;
+				}
+				@media only screen and (max-width: 668px) {
+					.login__form__fields__Wrapper {
+						min-height: 100%;
+						display: flex;
+						flex-direction: column;
+						flex-wrap: nowrap;
+						justify-content: space-evenly;
+						align-items: center;
+						min-width:100%;
+						padding: 1vw 4vw;
+					}
+					.book-shelf-cover {
+						width: 0;
+						min-height: 0;
+						height: 0;
+						display: none;
+					}
 				}
 			`}</style>
 		</div>
