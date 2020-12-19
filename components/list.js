@@ -32,10 +32,12 @@ export default function List ({view, title, iconType, books, information, closeC
 	return (
 		<div 
 		className={`list ${information && 'full-width'}`}>
-			<h1 
-			className="list__title bb-typography__title">
-				{SetListIcon(iconType)}  {title}
-			</h1>
+			{title && 
+				<h1 
+				className="list__title bb-typography__title">
+					{SetListIcon(iconType)}  {title}
+				</h1>
+			}
 			{books && books.length > 0 ?
 				<div 
 				className={`list__wrapper list__wrapper__${view == 'column' ? 'column' : 'row'} ${information && 'full-width'} ${scroll ? 'webkit-scroll' : ''}`} >
@@ -67,6 +69,12 @@ export default function List ({view, title, iconType, books, information, closeC
 
 					.list__title {
 						color: ${theme.primaryFontColor}
+					}
+					@media only screen and (max-width: 767px) {
+						.list__wrapper__row > .list__card__row {
+							background-color: ${theme.secondaryBackgroundColor};
+							border-radius: 20px;
+						}
 					}
 					@media only screen and (min-width: 768px) {
 						.list {
