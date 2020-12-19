@@ -52,7 +52,7 @@ body {
 }
 
 .bb-typography__nav-link {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 900px;
 }
 
@@ -88,7 +88,7 @@ body {
   }
 
   .bb-typography__nav-link {
-    font-size: 22px;
+    font-size: 16px;
   }
 }
 @media only screen and (min-width: 1200px) and (min-height: 300px) {
@@ -122,7 +122,7 @@ body {
   }
 
   .bb-typography__nav-link {
-    font-size: 23px;
+    font-size: 18px;
   }
 }
 
