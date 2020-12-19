@@ -1,8 +1,7 @@
 import mongoose from 'mongoose'
 
-import { MONGO_URL } from '../../db-keys'
-
 export default async function connectToDatabase () {
+    const {MONGO_URL} = process.env
     let status = await mongoose.connect(MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true

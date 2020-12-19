@@ -4,10 +4,10 @@ import * as mongoose from 'mongoose'
 
 import DBContext from './db-context'
 
-import { MONGO_URL } from '../../db-keys'
 import userSchema from '../../database/models/user'
 
 async function dbConnect() {
+    const {MONGO_URL} = process.env
     mongoose.connect(MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true
