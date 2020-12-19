@@ -25,6 +25,17 @@ export default function AuthProvider({children}) {
 	const confirmEmail = token => {
 		return auth.confirm(token, false)
     }
+
+    const findUserProfile = email => {
+        return new Promise(async (resolve, reject) => {
+            await fetch(`/api/users?email=${email}`, {
+                method: 'GET'
+            })
+            .then(res => res.json())
+            .then(data => resolve(data))
+            .catch(error => reject(error))
+        })
+    }
     
     useEffect(() => {
 		setUser(typeof window !== 'undefined' && auth.currentUser()) 
@@ -39,7 +50,8 @@ export default function AuthProvider({children}) {
             signUp,
             signIn,
             signOut,
-            confirmEmail
+            confirmEmail,
+            findUserProfile
         }}>
             {children}
         </AuthContext.Provider>
