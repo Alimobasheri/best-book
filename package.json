@@ -15,7 +15,7 @@
     "@fortawesome/react-fontawesome": "^0.1.11",
     "gotrue-js": "^0.9.27",
     "mongoose": "^5.10.13",
-    "next": "9.5.4",
+    "next": "11.1.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-swipeable": "^5.5.1",
