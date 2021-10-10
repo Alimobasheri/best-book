@@ -1,0 +1,15 @@
+.wrapper {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 20px;
+  height: 100vh;
+  padding: 20px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  & .rightHeadline {
+    margin-bottom: 10px;
+  }
+}
