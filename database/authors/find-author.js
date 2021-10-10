@@ -9,10 +9,10 @@ try {
     Author = mongoose.model("Author", authorSchema)
 }
 
-export default async function findAuthor(name) {
+export default async function findAuthor(query) {
     return await new Promise(async (resolve, reject) => {
-        const search = name ?
-            async () => await Author.findOne({name}) :
+        const search = query ?
+            async () => await Author.findOne(query) :
             async () => await Author.find()
         await search().then(foundAuthors => {
             if(foundAuthors) {

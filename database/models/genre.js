@@ -8,5 +8,9 @@ export const genreSchema = new mongoose.Schema({
     books: {
         type: [mongoose.Types.ObjectId],
         default: []
+    },
+    iconSrc: {
+        type: String,
+        default: ''
     }
 })

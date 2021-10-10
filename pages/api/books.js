@@ -1,4 +1,4 @@
-import {connect, findBooks, registerBook, findAuthor, registerAuthor} from '../../database'
+import {connect, findBooks, registerBook, findAuthor, registerAuthor, updateAuthor} from '../../database'
 
 export default async function books(req, res) {
     if(req.method === "POST") {
@@ -93,8 +93,19 @@ export default async function books(req, res) {
                 pageCount,
                 publishYear
             })
-            .then(response => {
+            .then(async response => {
                 if(response.saved) {
+                    [authorObjectId, translatorObjectId].forEach(authorToCollect => {
+                        if(authorToCollect) {
+                            await findAuthor({_id: authorToCollect})
+                            .then(async foundAuthor => {
+                                if(foundAuthor) {
+                                    let books = foundAuthor.books
+                                    await updateAuthor(authorObjectId, [...books, response.savedBook._id])
+                                }
+                            })
+                        }
+                    })
                     return res.status(200).json({savedBook: response.savedBook})
                 }
             })

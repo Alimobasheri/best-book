@@ -8,6 +8,7 @@ import registerBook from './books/register-book'
 
 import findAuthor from './authors/find-author'
 import registerAuthor from './authors/register-author'
+import updateAuthor from './authors/update-author'
 
 import addGenre from './genres/add-genre'
 import findGenre from './genres/find-genre'
@@ -20,6 +21,7 @@ export {
     registerBook,
     findAuthor,
     registerAuthor,
+    updateAuthor,
     addGenre,
     findGenre
 }

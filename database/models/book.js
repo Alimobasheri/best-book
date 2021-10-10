@@ -31,7 +31,7 @@ export const bookSchema = new mongoose.Schema({
     },
     publishYear: {
         type: Date,
-        default: Date.now()
+        default: new Date().getFullYear
     },
     ratings: {
         type: [mongoose.Types.ObjectId],
